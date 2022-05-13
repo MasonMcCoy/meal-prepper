@@ -1,6 +1,6 @@
 // API Credentials
-var appID = "4238a1ff";
-var appKey = "c7d57c2318b4a47dee8151c302c2a3cb";
+var appID = config.app_id;
+var appKey = config.app_key;
 
 var searchBttn = $("#search-button");
 
