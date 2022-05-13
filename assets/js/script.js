@@ -31,4 +31,6 @@ function getResponse(event) {
     }})
 }
 
+console.log("A change was made!");
+
 searchBttn.on("click", getResponse);
