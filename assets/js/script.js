@@ -31,6 +31,7 @@ function getResponse(event) {
     }})
 }
 
+
 searchBttn.on("click", getResponse);
 
 let map, infoWindow;
@@ -79,3 +80,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 window.initMap = initMap;
+
+console.log("A change was made!");
+
+searchBttn.on("click", getResponse);
+
