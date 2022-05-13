@@ -13,6 +13,15 @@ button {
     margin-top: 10px;
 }
 
+#content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.recipe-card {
+  margin: 10px;
+}
+
 /* 
  * Always set the map height explicitly to define the size of the div element
  * that contains the map. 
