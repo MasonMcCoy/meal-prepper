@@ -30,58 +30,39 @@ function getResponse(event) {
         }
     }})
 }
-
-
 searchBttn.on("click", getResponse);
 
-let map, infoWindow;
+const filmBaseURL = 'https://api.sampleapis.com/movies/';
 
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 6,
-  });
-  infoWindow = new google.maps.InfoWindow();
+let dropList = document.querySelector('.dropdown')
+let genreList = document.querySelector('.dropdown-content')
+let filmOptionsEl = document.getElementById('film-options')
 
-    window.addEventListener("load", () => {
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-            const pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            };
+dropList.addEventListener('click', function() {
+    dropList.classList.toggle('is-active')
+})
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent("Location found.");
-            infoWindow.open(map);
-            map.setCenter(pos);
-            },
-            () => {
-            handleLocationError(true, infoWindow, map.getCenter());
+genreList.addEventListener('click', getFilm);
+
+function getFilm(e) {
+    let genrePick = e.explicitOriginalTarget.firstChild.data
+    genreURL = filmBaseURL + genrePick;
+
+    fetch(genreURL)
+        .then(resp => resp.json())
+        .then(data => displayFilms(data))
+
+        function displayFilms(data) {
+            for (let i = 0; i < 5; i++) {
+                let filmTitleEl = document.createElement('h2')
+                let filmPicEl = document.createElement('img')
+                filmTitleEl.innerHTML = '<strong>' + data[i].title + '</strong>'
+                filmPicEl.setAttribute('src', data[i].posterURL)
+                filmOptionsEl.appendChild(filmTitleEl)
+                filmOptionsEl.appendChild(filmPicEl)
             }
-        );
-        } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
         }
-    });
 }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(
-    browserHasGeolocation
-      ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
-  );
-  infoWindow.open(map);
-}
 
-window.initMap = initMap;
-
-console.log("A change was made!");
-
-searchBttn.on("click", getResponse);
 
