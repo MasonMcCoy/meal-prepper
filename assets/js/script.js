@@ -82,7 +82,7 @@ function renderRecipes(recipesResponse) {
         console.log("-----");
     }
 }
- 
+
 // Movie API
 
 // Movie API Variables
@@ -105,6 +105,7 @@ genreList.addEventListener('click', getFilm);
 
 function getFilm(e) {
     let genrePick = e.explicitOriginalTarget.firstChild.data
+    console.log(e)
     fetch(genreURL)
         .then(resp => resp.json())
         .then(data => codifyGenre(data))
@@ -137,9 +138,11 @@ function getFilm(e) {
                     filmDiv.appendChild(filmScoreEl)
                     filmDiv.appendChild(filmPicEl)
                     filmDiv.appendChild(filmInfoEl)
-                    contentContainer.appendChild(filmDiv)
+                    contentContainer.append(filmDiv)
                 }
             }
+        }
+}
 
 //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
 
@@ -152,8 +155,8 @@ function showModal(event) {
 
 searchBttn.on("click", getRecipes);
 contentContainer.on("click", showModal);
-      
+
 let configurationURL = 'https://api.themoviedb.org/3/configuration?api_key=' + tmdbKey
 fetch(configurationURL)
-  .then(resp => resp.json())
-  .then(data => console.log(data))
+    .then(resp => resp.json())
+    .then(data => console.log(data))
