@@ -8,13 +8,23 @@
         <link rel="stylesheet" href="./assets/css/styles.css">
     </head>
     <body>
-        <header class="hero is-small is-info">
+        <header class="hero is-small is-info hide">
             <div class="hero-body">
-                <h1 class="title">Meal Prepper</h1>
-                <p class="subtitle">Catchy Tag Line</p>
+                <h1 class="title">Homebuddy</h1>
+                <p class="subtitle">Sometimes it's better to stay home.</p>
             </div>
         </header>
-        <form class="field">
+        <!-- div of entire landing page -->
+        <div id="homepage" class="homepage">
+            <div id="homepage-content" class="homepage-content">
+            <h1 class="homepage-header">Homebuddy</h1>
+            <h2>You guessed it, you're staying in tonight!</h2>
+            <button id="homepage-button" class="homepage-button">Create your Evening</button>
+        </div>
+        </div>
+        <!-- end of homepage -->
+
+        <form class="field hide">
             <div class="control">
                 <label class="label">Search for Recipes!</label>
                 <input class="input is-large" id="search-term" type="text" placeholder="i.e. Chicken Salad">

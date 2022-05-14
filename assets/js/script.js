@@ -1,3 +1,17 @@
+// homepage
+var homepageButton = document.getElementById('homepage-button')
+var homepage = document.getElementById('homepage')
+document.addEventListener('click' , removeHides)
+
+function removeHides() {
+    var header = document.querySelector('.hero')
+    var search = document.querySelector('.field')
+    header.classList.remove('hide')
+    search.classList.remove('hide')
+    homepage.classList.add('hide')
+//    DOES NOT REMOVE MOVIES HIDE YET
+}
+
 // API Credentials
 var appID = config.app_id;
 var appKey = config.app_key;
@@ -104,7 +118,8 @@ dropList.addEventListener('click', function() {
 genreList.addEventListener('click', getFilm);
 
 function getFilm(e) {
-    let genrePick = e.explicitOriginalTarget.firstChild.data
+    console.log(e)
+    // let genrePick = e.explicitOriginalTarget.firstChild.data
     fetch(genreURL)
         .then(resp => resp.json())
         .then(data => codifyGenre(data))
@@ -137,9 +152,11 @@ function getFilm(e) {
                     filmDiv.appendChild(filmScoreEl)
                     filmDiv.appendChild(filmPicEl)
                     filmDiv.appendChild(filmInfoEl)
-                    contentContainer.appendChild(filmDiv)
+                    contentContainer.append(filmDiv)
                 }
             }
+        }
+    }
 
 //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
 
