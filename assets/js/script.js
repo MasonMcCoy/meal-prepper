@@ -25,8 +25,11 @@ function getRecipes(event) {
 }
 
 function renderRecipes(recipesResponse) {
+    // Clears any existing grid that may already exist
+    contentContainer.text("");
+
     for (var i = 0; i < recipesResponse.length; i++) {
-        var recipeCard = $("<div>").attr("class", "card recipe-card");
+        var recipeCard = $("<section>").attr("class", "card");
         
         // CARD TITLE
         var recipeName = $("<div>").attr("class", "card-hearder");
@@ -79,6 +82,13 @@ function renderRecipes(recipesResponse) {
     }
 }
 
+function showModal(event) {
+    if (event.target.tagName != "IMG"){
+        return
+    }
+    console.log(event.target);
+}
+
 // let map, infoWindow;
 
 // function initMap() {
@@ -127,4 +137,4 @@ function renderRecipes(recipesResponse) {
 // window.initMap = initMap;
 
 searchBttn.on("click", getRecipes);
-
+contentContainer.on("click", showModal);
