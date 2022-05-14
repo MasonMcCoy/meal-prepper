@@ -13,6 +13,10 @@ button {
     margin-top: 10px;
 }
 
+section {
+  margin: 10px;
+}
+
 #content {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
