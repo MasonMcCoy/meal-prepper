@@ -6,11 +6,6 @@
         <title>Meal Prepper</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="stylesheet" href="./assets/css/styles.css">
-
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"></script>
-        <link rel="stylesheet" type="text/css" href="./assets/css/styles.css" />
-        <script type="module" src="./index.js"></script>
     </head>
     <body>
         <header class="hero is-small is-info">
@@ -28,9 +23,42 @@
         </form>
 
         <main id="content"></main>
-        <!-- <div id="map"></div> -->
         
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly" defer></script>
+        <div class="section">
+            <div class="dropdown">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3" id="genres">
+                        <span>Click me</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                    <div class="dropdown-content">
+                        <a href="#" class="dropdown-item">Action</a>
+                        <a href="#" class="dropdown-item">Adventure</a>
+                        <a href="#" class="dropdown-item">Animation</a>
+                        <a href="#" class="dropdown-item">Comedy</a>
+                        <a href="#" class="dropdown-item">Crime</a>
+                        <a href="#" class="dropdown-item">Documentary</a>
+                        <a href="#" class="dropdown-item">Drama</a>
+                        <a href="#" class="dropdown-item">Family</a>
+                        <a href="#" class="dropdown-item">Fantasy</a>
+                        <a href="#" class="dropdown-item">History</a>
+                        <a href="#" class="dropdown-item">Horror</a>
+                        <a href="#" class="dropdown-item">Music</a>
+                        <a href="#" class="dropdown-item">Mystery</a>
+                        <a href="#" class="dropdown-item">Romance</a>
+                        <a href="#" class="dropdown-item">Science Fiction</a>
+                        <a href="#" class="dropdown-item">Thriller</a>
+                        <a href="#" class="dropdown-item">War</a>
+                        <a href="#" class="dropdown-item">Western</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="./assets/js/config.js"></script>
         <script src="./assets/js/script.js"></script>
