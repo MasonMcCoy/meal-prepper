@@ -42,8 +42,8 @@ const filmBaseURL = 'https://api.sampleapis.com/movies/';
 
 let dropList = document.querySelector('.dropdown')
 let genreList = document.querySelector('.dropdown-content')
-let filmOptionsEl = document.getElementById('film-options')
 let genreQuery;
+let mainDiv = document.getElementById('content')
 
 dropList.addEventListener('click', function() {
     dropList.classList.toggle('is-active')
@@ -70,7 +70,9 @@ function getFilm(e) {
                 console.log(data)
                 console.log(genreQuery)
                 console.log(discoverURL+genreQuery)
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 8; i++) {
+                    let filmDiv = document.createElement('section')
+                    filmDiv.classList.add('card', 'film-section')
                     let filmTitleEl = document.createElement('h2')
                     let filmScoreEl = document.createElement('h2')
                     let filmPicEl = document.createElement('img')
@@ -79,10 +81,11 @@ function getFilm(e) {
                     filmScoreEl.innerHTML = '<strong>' + data.results[i].vote_average + '</strong>'  + '/10'
                     filmPicEl.setAttribute('src', imageBaseURL + '/w185/' + data.results[i].poster_path)
                     filmInfoEl.textContent = data.results[i].overview
-                    filmOptionsEl.appendChild(filmTitleEl)
-                    filmOptionsEl.appendChild(filmScoreEl)
-                    filmOptionsEl.appendChild(filmPicEl)
-                    filmOptionsEl.appendChild(filmInfoEl)
+                    filmDiv.appendChild(filmTitleEl)
+                    filmDiv.appendChild(filmScoreEl)
+                    filmDiv.appendChild(filmPicEl)
+                    filmDiv.appendChild(filmInfoEl)
+                    mainDiv.appendChild(filmDiv)
                 }
             }
     }

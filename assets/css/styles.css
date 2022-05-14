@@ -12,3 +12,12 @@ form {
 button {
     margin-top: 10px;
 }
+
+#content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.film-section {
+    padding: 1rem
+}
