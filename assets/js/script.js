@@ -59,36 +59,34 @@ function getFilm(e) {
     
     function codifyGenre(data) {
         for (let i = 0; i < data.genres.length; i++) {
-            if (genrePick == data.genres[i].name) {
+            if (genrePick === data.genres[i].name) {
                 genreQuery = data.genres[i].id
                 }
             }
-        }
-
         fetch(discoverURL + genreQuery)
-                    .then(resp => resp.json())
-                    .then(data => displayFilms(data))
-                        function displayFilms(data) {
-                            console.log(data)
-                            console.log(genreQuery)
-                            console.log(discoverURL+genreQuery)
-                            //why does it just looooove sonic?
-                            for (let i = 0; i < 5; i++) {
-                                let filmTitleEl = document.createElement('h2')
-                                let filmScoreEl = document.createElement('h2')
-                                let filmPicEl = document.createElement('img')
-                                let filmInfoEl = document.createElement('p')
-                                filmTitleEl.innerHTML = '<strong>' + data.results[i].title + '</strong>';
-                                filmScoreEl.innerHTML = '<strong>' + data.results[i].vote_average + '/10' + '</strong>'
-                                filmPicEl.setAttribute('src', imageBaseURL + '/w185/' + data.results[i].poster_path)
-                                filmInfoEl.textContent = data.results[i].overview
-                                filmOptionsEl.appendChild(filmTitleEl)
-                                filmOptionsEl.appendChild(filmScoreEl)
-                                filmOptionsEl.appendChild(filmPicEl)
-                                filmOptionsEl.appendChild(filmInfoEl)
-                            }
-                        }
+            .then(resp => resp.json())
+            .then(data => displayFilms(data))
+            function displayFilms(data) {
+                console.log(data)
+                console.log(genreQuery)
+                console.log(discoverURL+genreQuery)
+                for (let i = 0; i < 10; i++) {
+                    let filmTitleEl = document.createElement('h2')
+                    let filmScoreEl = document.createElement('h2')
+                    let filmPicEl = document.createElement('img')
+                    let filmInfoEl = document.createElement('p')
+                    filmTitleEl.innerHTML = '<strong>' + data.results[i].title + '</strong>';
+                    filmScoreEl.innerHTML = '<strong>' + data.results[i].vote_average + '</strong>'  + '/10'
+                    filmPicEl.setAttribute('src', imageBaseURL + '/w185/' + data.results[i].poster_path)
+                    filmInfoEl.textContent = data.results[i].overview
+                    filmOptionsEl.appendChild(filmTitleEl)
+                    filmOptionsEl.appendChild(filmScoreEl)
+                    filmOptionsEl.appendChild(filmPicEl)
+                    filmOptionsEl.appendChild(filmInfoEl)
+                }
+            }
     }
+}
     //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
 
     let configurationURL = 'https://api.themoviedb.org/3/configuration?api_key=' + tmdbKey
