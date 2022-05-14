@@ -13,21 +13,11 @@ button {
     margin-top: 10px;
 }
 
-/* 
- * Always set the map height explicitly to define the size of the div element
- * that contains the map. 
- */
- #map {
-    height: 40%;
-  }
-  
-  /* 
-   * Optional: Makes the sample page fill the window. 
-   */
-  html,
-  body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
+#content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.film-section {
+    padding: 1rem
+}

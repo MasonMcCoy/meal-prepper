@@ -1,6 +1,6 @@
 // API Credentials
-var appID = "4238a1ff";
-var appKey = "c7d57c2318b4a47dee8151c302c2a3cb";
+var appID = config.app_id;
+var appKey = config.app_key;
 
 var searchBttn = $("#search-button");
 
@@ -31,57 +31,68 @@ function getResponse(event) {
     }})
 }
 
+let tmdbKey = 'e86784e99f17cd9b8e35fcc922379812'
+let genreURL =  'https://api.themoviedb.org/3/genre/movie/list?api_key=' + tmdbKey + '&language=en-US'
+let discoverURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbKey + '&language=en-US&page=1' + '&with_genres='
+let imageBaseURL = 'http://image.tmdb.org/t/p/'
 
 searchBttn.on("click", getResponse);
 
-let map, infoWindow;
+const filmBaseURL = 'https://api.sampleapis.com/movies/';
 
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 6,
-  });
-  infoWindow = new google.maps.InfoWindow();
+let dropList = document.querySelector('.dropdown')
+let genreList = document.querySelector('.dropdown-content')
+let genreQuery;
+let mainDiv = document.getElementById('content')
 
-    window.addEventListener("load", () => {
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-            const pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-            };
+dropList.addEventListener('click', function() {
+    dropList.classList.toggle('is-active')
+})
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent("Location found.");
-            infoWindow.open(map);
-            map.setCenter(pos);
-            },
-            () => {
-            handleLocationError(true, infoWindow, map.getCenter());
+genreList.addEventListener('click', getFilm);
+
+function getFilm(e) {
+    let genrePick = e.explicitOriginalTarget.firstChild.data
+    fetch(genreURL)
+        .then(resp => resp.json())
+        .then(data => codifyGenre(data))
+    
+    function codifyGenre(data) {
+        for (let i = 0; i < data.genres.length; i++) {
+            if (genrePick === data.genres[i].name) {
+                genreQuery = data.genres[i].id
+                }
             }
-        );
-        } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-        }
-    });
+        fetch(discoverURL + genreQuery)
+            .then(resp => resp.json())
+            .then(data => displayFilms(data))
+            function displayFilms(data) {
+                console.log(data)
+                console.log(genreQuery)
+                console.log(discoverURL+genreQuery)
+                for (let i = 0; i < 8; i++) {
+                    let filmDiv = document.createElement('section')
+                    filmDiv.classList.add('card', 'film-section')
+                    let filmTitleEl = document.createElement('h2')
+                    let filmScoreEl = document.createElement('h2')
+                    let filmPicEl = document.createElement('img')
+                    let filmInfoEl = document.createElement('p')
+                    filmTitleEl.innerHTML = '<strong>' + data.results[i].title + '</strong>';
+                    filmScoreEl.innerHTML = '<strong>' + data.results[i].vote_average + '</strong>'  + '/10'
+                    filmPicEl.setAttribute('src', imageBaseURL + '/w185/' + data.results[i].poster_path)
+                    filmInfoEl.textContent = data.results[i].overview
+                    filmDiv.appendChild(filmTitleEl)
+                    filmDiv.appendChild(filmScoreEl)
+                    filmDiv.appendChild(filmPicEl)
+                    filmDiv.appendChild(filmInfoEl)
+                    mainDiv.appendChild(filmDiv)
+                }
+            }
+    }
 }
+    //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(
-    browserHasGeolocation
-      ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
-  );
-  infoWindow.open(map);
-}
-
-window.initMap = initMap;
-
-console.log("A change was made!");
-
-searchBttn.on("click", getResponse);
-
+    let configurationURL = 'https://api.themoviedb.org/3/configuration?api_key=' + tmdbKey
+    fetch(configurationURL)
+        .then(resp => resp.json())
+        .then(data => console.log(data))
