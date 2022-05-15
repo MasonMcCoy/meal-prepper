@@ -43,33 +43,39 @@ function renderRecipes(recipesResponse) {
     // Clears any existing grid that may already exist
     contentContainer.text("");
 
+    buildModal();
+
     for (var i = 0; i < recipesResponse.length; i++) {
-        var recipeCard = $("<section>").attr("class", "card");
+        var recipeCard = $("<section>").addClass("card");
         
+        // Create data attributes
+        recipeCard.attr("data-title", recipesResponse[i].recipe.label);
+        recipeCard.attr("data-image", recipesResponse[i].recipe.images.REGULAR.url);
+        recipeCard.attr("data-cuisine", recipesResponse[i].recipe.cuisineType[0]);
+        recipeCard.attr("data-prep", recipesResponse[i].recipe.totalTime);
+        recipeCard.attr("data-url", recipesResponse[i].recipe.url);
+        recipeCard.attr("data-ingredients", recipesResponse[i].recipe.ingredientLines);
+
         // CARD TITLE
-        var recipeName = $("<div>").attr("class", "card-hearder");
+        var recipeName = $("<div>").addClass("card-header");
         
         // Recipe Name
-        recipeName.append($("<div>").attr("class", "card-hearder-title").text(recipesResponse[i].recipe.label));
+        recipeName.append($("<div>").addClass("card-header-title").text(recipesResponse[i].recipe.label));
         console.log(recipesResponse[i].recipe.label);
 
         // CARD IMAGE
-        var recipeImg = $("<div>").attr("class", "card-image");
-        
-        // Thumbnail
-        recipeImg.append($("<figure>").attr("class", "image is-4by3")
-        .append($("<img>").attr("src", recipesResponse[i].recipe.images.REGULAR.url)));
-        console.log(recipesResponse[i].recipe.images.REGULAR.url);
+        var recipeImg = $("<figure>").addClass("image is-4by3")
+        .append($("<img>").attr("src", recipesResponse[i].recipe.images.REGULAR.url));
 
         // CARD FOOTER
-        var recipeData = $("<div>").attr("class", "card-footer");
+        var recipeData = $("<div>").addClass("card-footer");
         
         // Cuisine Type
-        recipeData.append($("<div>").attr("class", "card-footer-item").text(recipesResponse[i].recipe.cuisineType[0]));
+        recipeData.append($("<div>").addClass("card-footer-item").text(recipesResponse[i].recipe.cuisineType[0]));
         console.log(recipesResponse[i].recipe.cuisineType[0]);
 
         // Prep Time
-        recipeData.append($("<div>").attr("class", "card-footer-item").text(recipesResponse[i].recipe.totalTime));
+        recipeData.append($("<div>").addClass("card-footer-item").text(recipesResponse[i].recipe.totalTime));
         console.log(recipesResponse[i].recipe.totalTime);
 
         recipeCard.append(recipeName);
@@ -77,7 +83,6 @@ function renderRecipes(recipesResponse) {
         recipeCard.append(recipeData);
 
         contentContainer.append(recipeCard);
-
 
         // Link to Recipe (On Modal)
         var recipeLink = recipesResponse[i].recipe.url;
@@ -165,15 +170,86 @@ function getFilm(e) {
     
 //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
 
+function buildModal() {
+    var modal = $("<div>").addClass("modal").attr("id", "modal");
+    
+    var modalBackground = $("<div>").addClass("modal-background");
+    
+    var modalCard = $("<div>").addClass("modal-card");
+    
+    // Header and title
+    var modalHead = $("<div>").addClass("modal-card-head");
+    var modalTitle = $("<div>").addClass("modal-card-title").attr("id", "recipe-title");
+
+    // Body with content
+    var modalBody = $("<div>").addClass("modal-card-body").attr("id", "recipe-content");
+    
+    // Footer and buttons
+    var modalFooter = $("<footer>").addClass("modal-card-foot");
+    var saveBttn = $("<button>").text("Save").addClass("button");
+    var selectBttn = $("<button>").text("Select").addClass("button");
+
+    modalHead.append(modalTitle);
+
+    modalFooter.append(saveBttn);
+    modalFooter.append(selectBttn);
+
+    modalCard.append(modalHead);
+    modalCard.append(modalBody);
+    modalCard.append(modalFooter);
+
+    modal.append(modalBackground);
+    modal.append(modalCard);
+    
+    contentContainer.append(modal);
+}
+
+function updateModal(recipeCard) {
+    // Modal elements
+    var modRecipeName = $("#recipe-title");
+    var modRecipeContent = $("#recipe-content");
+
+    // Updates modal elements with data from data attributes
+    modRecipeName.text(recipeCard.dataset.title);
+
+    modRecipeContent.append($("<img>").attr("src", recipeCard.dataset.image));
+
+    modRecipeContent.append($("<h3>").text("Ingredients"));
+    var ingredArr = recipeCard.dataset.ingredients.split(",");
+    for (var i = 0; i < ingredArr.length; i++) {
+        modRecipeContent.append($("<p>").text(ingredArr[i]));
+    }
+
+}
+
 function showModal(event) {
-    if (event.target.tagName != "IMG"){
+    // Clicking anywhere in the recipe card references the parent container
+    var parentCon = event.target.parentNode.parentNode;
+
+    // Only triggers modal on recipe card click
+    if (parentCon.tagName != "SECTION"){
         return
     }
-    console.log(event.target);
+
+    // Updates modal with recipe card information
+    updateModal(parentCon);
+
+    var modal = $("#modal");
+
+    // Display the modal
+    modal.css("display", "block");
+  
+    // Close modal when you click off of it
+    window.onclick = function(event) {
+        if (event.target.classList.contains("modal-background")) {
+            modal.css("display", "none");
+        }
+    }
 }
 
 searchBttn.on("click", getRecipes);
 contentContainer.on("click", showModal);
+
 
 let configurationURL = 'https://api.themoviedb.org/3/configuration?api_key=' + tmdbKey
 fetch(configurationURL)
