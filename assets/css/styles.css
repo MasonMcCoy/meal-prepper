@@ -1,5 +1,9 @@
 body, html {
     height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
   }
 /* homepage styles */
 .homepage {
@@ -16,8 +20,8 @@ body, html {
 }
 
 .homepage-content {
-    display: flex;
-    justify-content: center;
+    display: inline-block;
+    text-align: center;
     flex-direction: column;
 }
 
@@ -31,26 +35,31 @@ body, html {
 .homepage-button {
     margin-top: 10px;
     display: inline-block;
-    background-color: rgb(94, 7, 40);
+    background-color: rgb(173, 33, 14);
     color: white;
-    border-color: rgb(37, 2, 16);
-  padding: 20px;
+    border-color: rgb(126, 23, 10);
+  padding: 10px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
-  border-radius: 50%;
+  border-radius: 9px;
+  width: fit-content;
   
 }
 
 
 button:hover {
-   background-color: rgb(100, 48, 68);  
+   background-color: rgb(126, 23, 10);
+   cursor: pointer;
+   color: white;
 }
 
+/* styles for recipes page */
 
+/* header */
 header {
     display: flex;
-    align-content: flex-end;
+   justify-content: center;
     height: 300px;
     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559609/Project1-Images/GettyImages_1032865588_c3pry7.jpg");
     background-position: center;
@@ -58,20 +67,37 @@ header {
     background-size: cover;
 }
 
+.saved-recipes {
+    display: inline-block;
+    
+    margin-top: 80px;
+
+}
+
+li:hover {
+   color: rgb(173, 33, 14);
+   cursor: pointer;
+}
+
 .title  {
     font-size: 5em;
 }
-
+/* body of page */
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
 }
-
-button {
+/* button styles */
+.button {
     margin-top: 10px;
+    color: white;
+    background-color: rgb(173, 33, 14);
+    border-color: rgb(126, 23, 10);
 }
+
+/* section displaying rendered cards */
 
 section {
     margin: 10px;
@@ -80,8 +106,44 @@ section {
 #content {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    margin: 40px 40px;
+    padding: 10px 10px;
+
 }
 
+/* recipe card styles */
+.card {
+    margin: 10px 10px;
+    background-color: rgb(245, 243, 239);
+    color: black;  
+    transition: box-shadow .3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 20px rgba(2, 2, 2, 0.2); 
+    cursor: pointer;
+    position: relative;
+    top:-5px;
+    left:-5px;
+    display:block;
+}
+
+.card-hearder-title {
+    padding-left: 5px;
+}
+
+/* search bar on recipes page */
+.control {
+display: inline-block;
+
+}
+
+.label {
+text-align: center;
+}
+
+
+/* film section */
 .film-section {
     padding: 1rem;
     transition: 0.4s;
