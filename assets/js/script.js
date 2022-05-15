@@ -86,18 +86,51 @@ function renderRecipes(recipesResponse) {
 // Movie API
 
 // Movie API Variables
-let tmdbKey = 'e86784e99f17cd9b8e35fcc922379812'
+const tmdbKey = 'e86784e99f17cd9b8e35fcc922379812'
 let genreURL =  'https://api.themoviedb.org/3/genre/movie/list?api_key=' + tmdbKey + '&language=en-US'
-let discoverURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbKey + '&language=en-US&page=1' + '&with_genres='
+let discoverURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbKey + '&language=en-US' + '&with_genres='
 let imageBaseURL = 'http://image.tmdb.org/t/p/'
-
-const filmBaseURL = 'https://api.sampleapis.com/movies/';
+let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdbKey + '&language=en-US&page=1&query='
 
 let placeholderButton = document.getElementById('placeholder')
-let filmSearchDiv = document.getElementById('film-search')
+let filmSearchEl = document.getElementById('film-search')
 let genreQuery;
 
 placeholderButton.addEventListener('click', genreButtons)
+placeholderButton.addEventListener('click', filmSrch)
+
+function filmSrch() {
+    let filmSearchForm = document.createElement('form')
+    let filmSearchDiv = document.createElement('div')
+    let filmSearchLabel = document.createElement('label')
+    let filmSearchInput = document.createElement('input')
+    let filmSearchBtn = document.createElement('button')
+    filmSearchForm.classList.add('field')
+    filmSearchDiv.classList.add('control')
+    filmSearchLabel.classList.add('label')
+    filmSearchInput.classList.add('input', 'is-large')
+    filmSearchBtn.classList.add('button')
+    filmSearchInput.setAttribute('type', 'text')
+    filmSearchInput.setAttribute('placeholder', 'i.e. Inherent Vice')
+    filmSearchInput.setAttribute('id', 'film-search-term')
+    filmSearchBtn.setAttribute('type', 'button')
+    filmSearchBtn.innerHTML = 'Search'
+
+    filmSearchEl.appendChild(filmSearchForm)
+    filmSearchForm.appendChild(filmSearchDiv)
+    filmSearchDiv.appendChild(filmSearchLabel)
+    filmSearchDiv.appendChild(filmSearchInput)
+    filmSearchForm.appendChild(filmSearchBtn)
+    filmSearchBtn.addEventListener('click', searchForFilm)
+}
+
+function searchForFilm() {
+    let filmSearch = document.getElementById('film-search-term').value
+
+    fetch (filmSearchURL + filmSearch)
+        .then(resp => resp.json())
+        .then(data => displayFilms(data))
+}
 
 function genreButtons() {
     fetch (genreURL)
@@ -107,7 +140,7 @@ function genreButtons() {
     function genFilmBtns(data) {
         let genreDiv = document.createElement('div');
         genreDiv.classList.add('genre-buttons')
-        filmSearchDiv.append(genreDiv)
+        filmSearchEl.append(genreDiv)
         for (var i = 0; i < data.genres.length; i++) {
             let genreBtn = document.createElement('button')
             // genreBtn.classList.add('genre-buttons')
@@ -116,13 +149,11 @@ function genreButtons() {
             genreDiv.appendChild(genreBtn)
         }
         let genreList = document.querySelector('.genre-buttons')
-        genreList.addEventListener('click', getFilm);
+        genreList.addEventListener('click', getFilms);
     }
 }
-function getFilm(e) {
-    while (contentContainer.firstChild) {
-        contentContainer.removeChild(contentContainer.lastChild)
-    }
+function getFilms(e) {
+    contentContainer.text("");
     let genrePick = e.target.attributes[0].textContent
     fetch(genreURL)
         .then(resp => resp.json())
@@ -134,30 +165,41 @@ function getFilm(e) {
                 genreQuery = data.genres[i].id
                 }
             }
-        fetch(discoverURL + genreQuery)
+        let randoNum = Math.floor(Math.random() * 380)
+        fetch(discoverURL + genreQuery + '&page=' + randoNum)
             .then(resp => resp.json())
             .then(data => displayFilms(data))
-            function displayFilms(data) {
-                console.log(data)
-                for (let i = 0; i < 8; i++) {
-                    let filmDiv = document.createElement('section')
-                    filmDiv.classList.add('card', 'film-section')
-                    let filmTitleEl = document.createElement('h2')
-                    let filmScoreEl = document.createElement('h2')
-                    let filmPicEl = document.createElement('img')
-                    let filmInfoEl = document.createElement('p')
-                    filmTitleEl.innerHTML = '<strong>' + data.results[i].title + '</strong>';
-                    filmScoreEl.innerHTML = '<strong>' + data.results[i].vote_average + '</strong>'  + '/10'
-                    filmPicEl.setAttribute('src', imageBaseURL + '/w342/' + data.results[i].poster_path)
-                    filmInfoEl.textContent = data.results[i].overview
-                    filmDiv.appendChild(filmTitleEl)
-                    filmDiv.appendChild(filmScoreEl)
-                    filmDiv.appendChild(filmPicEl)
-                    filmDiv.appendChild(filmInfoEl)
-                    contentContainer.append(filmDiv)
-                }
-            }
+            
         }
+}
+
+function displayFilms(data) {
+    contentContainer.text("");
+    for (let i = 0; i < 16; i++) {
+        let filmDiv = document.createElement('section')
+        filmDiv.classList.add('card', 'film-section')
+        let filmDivFace = document.createElement('div')
+        filmDivFace.classList.add('film-face')
+        let filmDivBody = document.createElement('div')
+        filmDivBody.classList.add('film-body')
+        
+        let filmTitleEl = document.createElement('h2')
+        let filmPicEl = document.createElement('img')
+        let filmScoreEl = document.createElement('h2')
+        let filmInfoEl = document.createElement('p')
+        
+        filmTitleEl.innerHTML = '<strong>' + data.results[i].title + '</strong>';
+        filmPicEl.setAttribute('src', imageBaseURL + '/w342/' + data.results[i].poster_path)
+        filmScoreEl.innerHTML = '<strong>' + data.results[i].vote_average + '</strong>'  + '/10'
+        filmInfoEl.textContent = data.results[i].overview
+        filmDivFace.appendChild(filmTitleEl)
+        filmDivFace.appendChild(filmPicEl)
+        filmDivBody.appendChild(filmScoreEl)
+        filmDivBody.appendChild(filmInfoEl)
+        filmDiv.appendChild(filmDivFace)
+        filmDiv.appendChild(filmDivBody)
+        contentContainer.append(filmDiv)
+    }
 }
 
 //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
