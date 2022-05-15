@@ -93,19 +93,37 @@ let imageBaseURL = 'http://image.tmdb.org/t/p/'
 
 const filmBaseURL = 'https://api.sampleapis.com/movies/';
 
-let dropList = document.querySelector('.dropdown')
-let genreList = document.querySelector('.dropdown-content')
+let placeholderButton = document.getElementById('placeholder')
+let filmSearchDiv = document.getElementById('film-search')
 let genreQuery;
 
-dropList.addEventListener('click', function() {
-    dropList.classList.toggle('is-active')
-})
+placeholderButton.addEventListener('click', genreButtons)
 
-genreList.addEventListener('click', getFilm);
-
+function genreButtons() {
+    fetch (genreURL)
+        .then(resp => resp.json())
+        .then(data => genFilmBtns(data))
+    
+    function genFilmBtns(data) {
+        let genreDiv = document.createElement('div');
+        genreDiv.classList.add('genre-buttons')
+        filmSearchDiv.append(genreDiv)
+        for (var i = 0; i < data.genres.length; i++) {
+            let genreBtn = document.createElement('button')
+            // genreBtn.classList.add('genre-buttons')
+            genreBtn.setAttribute('data-genre', data.genres[i].name)
+            genreBtn.textContent = data.genres[i].name
+            genreDiv.appendChild(genreBtn)
+        }
+        let genreList = document.querySelector('.genre-buttons')
+        genreList.addEventListener('click', getFilm);
+    }
+}
 function getFilm(e) {
-    let genrePick = e.explicitOriginalTarget.firstChild.data
-    console.log(e)
+    while (contentContainer.firstChild) {
+        contentContainer.removeChild(contentContainer.lastChild)
+    }
+    let genrePick = e.target.attributes[0].textContent
     fetch(genreURL)
         .then(resp => resp.json())
         .then(data => codifyGenre(data))
@@ -121,8 +139,6 @@ function getFilm(e) {
             .then(data => displayFilms(data))
             function displayFilms(data) {
                 console.log(data)
-                console.log(genreQuery)
-                console.log(discoverURL+genreQuery)
                 for (let i = 0; i < 8; i++) {
                     let filmDiv = document.createElement('section')
                     filmDiv.classList.add('card', 'film-section')
@@ -132,7 +148,7 @@ function getFilm(e) {
                     let filmInfoEl = document.createElement('p')
                     filmTitleEl.innerHTML = '<strong>' + data.results[i].title + '</strong>';
                     filmScoreEl.innerHTML = '<strong>' + data.results[i].vote_average + '</strong>'  + '/10'
-                    filmPicEl.setAttribute('src', imageBaseURL + '/w185/' + data.results[i].poster_path)
+                    filmPicEl.setAttribute('src', imageBaseURL + '/w342/' + data.results[i].poster_path)
                     filmInfoEl.textContent = data.results[i].overview
                     filmDiv.appendChild(filmTitleEl)
                     filmDiv.appendChild(filmScoreEl)
