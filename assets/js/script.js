@@ -219,8 +219,3 @@ function showModal(event) {
 
 searchBttn.on("click", getRecipes);
 contentContainer.on("click", showModal);
-
-let configurationURL = 'https://api.themoviedb.org/3/configuration?api_key=' + tmdbKey
-fetch(configurationURL)
-    .then(resp => resp.json())
-    .then(data => console.log(data))
