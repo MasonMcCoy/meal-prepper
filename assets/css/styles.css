@@ -8,6 +8,7 @@ body, html {
     align-items: center;
     align-content: center;
     height: 100%;
+    width: auto;
     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/Stocksy_txpcd1dc0eemKP100_Medium_1292869_jxi1ai.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -93,13 +94,27 @@ form {
 /* recipe card styles */
 .card {
     margin: 10px 10px;
-    background-color: rgb(231, 195, 94);
+    background-color: rgb(255, 244, 208);
     color: black;  
+    transition: box-shadow .3s;
+}
+
+.card:hover {
+
+    box-shadow: 0 0 20px rgba(2, 2, 2, 0.3); 
+    cursor: pointer;
+    position: relative;
+    top:-5px;
+    left:-5px;
+    display:block;
+
+
 }
 
 .card-hearder-title {
     padding-left: 5px;
 }
+
 /* search bar on recipes page */
 .control {
 display: inline-block;
