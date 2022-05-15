@@ -137,10 +137,11 @@ function getFilm(e) {
                     filmDiv.appendChild(filmScoreEl)
                     filmDiv.appendChild(filmPicEl)
                     filmDiv.appendChild(filmInfoEl)
-                    contentContainer.appendChild(filmDiv)
+                    contentContainer.append(filmDiv)
                 }
             }
-
+        }
+    }
 //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
 
 function showModal(event) {
