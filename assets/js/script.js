@@ -121,6 +121,7 @@ function filmSrch() {
     filmSearchDiv.appendChild(filmSearchLabel)
     filmSearchDiv.appendChild(filmSearchInput)
     filmSearchForm.appendChild(filmSearchBtn)
+
     filmSearchBtn.addEventListener('click', searchForFilm)
 }
 
@@ -174,6 +175,11 @@ function getFilms(e) {
 }
 
 function displayFilms(data) {
+    if (data.total_results == 0) {
+        alert('No movie with that name')
+        return;
+    }
+    console.log(data)
     contentContainer.text("");
     for (let i = 0; i < 16; i++) {
         let filmDiv = document.createElement('section')
