@@ -3,12 +3,15 @@ var homepageButton = document.getElementById('homepage-button')
 var homepage = document.getElementById('homepage')
 document.addEventListener('click' , removeHides)
 
+// When homepage button is pressed, content appears on page
 function removeHides() {
-    var header = document.querySelector('.hero')
-    var search = document.querySelector('.field')
-    header.classList.remove('hide')
-    search.classList.remove('hide')
-    homepage.classList.add('hide')
+    var header = document.querySelector('.hero');
+    var search = document.querySelector('.field');
+    var movieSection = document.querySelector('.section');
+    header.classList.remove('hide');
+    search.classList.remove('hide');
+    homepage.classList.add('hide');
+    movieSection.classList.remove('hide');
 //    DOES NOT REMOVE MOVIES HIDE YET
 }
 
