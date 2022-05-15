@@ -109,7 +109,7 @@ form {
 /* recipe card styles */
 .card {
     margin: 10px 10px;
-    background-color: rgb(255, 244, 208);
+    background-color: rgb(245, 243, 239);
     color: black;  
     transition: box-shadow .3s;
 }
