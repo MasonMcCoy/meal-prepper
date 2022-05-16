@@ -6,7 +6,7 @@ document.addEventListener('click' , removeHides)
 // When homepage button is pressed, content appears on page
 function removeHides() {
     var header = document.querySelector('.hero');
-    var search = document.querySelector('.field');
+    var search = document.querySelector('.food-field');
     var movieSection = document.querySelector('.section');
     header.classList.remove('hide');
     search.classList.remove('hide');
@@ -153,6 +153,7 @@ function searchForFilm() {
     fetch (filmSearchURL + filmSearch)
         .then(resp => resp.json())
         .then(data => displayFilms(data))
+
 }
 
 function genreButtons() {
@@ -161,6 +162,7 @@ function genreButtons() {
         .then(data => genFilmBtns(data))
     
     function genFilmBtns(data) {
+        contentContainer.text("");
         let genreDiv = document.createElement('div');
         genreDiv.classList.add('genre-buttons')
         filmSearchEl.append(genreDiv)

@@ -158,12 +158,15 @@ text-align: center;
 }
 
 .genre-buttons button {
-    margin: .5rem;
-    border-radius: 5px;
-    background-color: rgb(24, 255, 197);
-    padding: .25rem .4rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 900;
+    margin-top: 10px;
+    color: white;
+    background-color: rgb(173, 33, 14);
+    border-color: rgb(126, 23, 10);
+}
+
+.title-2 {
+    font-size: 5em;
+    color: rgb(173, 33, 14);
 }
 
 /* class to add to elements to hide them  */
