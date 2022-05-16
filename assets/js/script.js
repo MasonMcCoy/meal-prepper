@@ -12,13 +12,19 @@ function removeHides() {
     search.classList.remove('hide');
     homepage.classList.add('hide');
     // movieSection.classList.remove('hide');
-//    DOES NOT REMOVE MOVIES HIDE YET
+    // DOES NOT REMOVE MOVIES HIDE YET
+
+    // Main content box is initially hidden, but revealed once we leave the landing page
+    contentContainer.css("display", "grid");
 }
 
 // API Credentials
 var appID = "4238a1ff";
 var appKey = "c7d57c2318b4a47dee8151c302c2a3cb";
 
+// DOM Variables
+var searchLabel = $("#search-label");
+var searchInput = $("#search-term");
 var searchBttn = $("#search-button");
 var contentContainer = $("#content");
 
@@ -27,7 +33,7 @@ var contentContainer = $("#content");
 function getRecipes(event) {
     event.preventDefault();
 
-    var searchTerm = $("#search-term").val();
+    var searchTerm = searchInput.val();
 
     var baseURL = "https://api.edamam.com/api/recipes/v2?type=public&q=";
     var call = baseURL + searchTerm + "&app_id=" + appID + "&app_key=" + appKey;
@@ -114,14 +120,22 @@ let discoverURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbK
 let imageBaseURL = 'http://image.tmdb.org/t/p/'
 let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdbKey + '&language=en-US&page=1&query='
 
-let placeholderButton = document.getElementById('placeholder')
 let filmSearchEl = document.getElementById('film-search')
 let genreQuery;
 
-placeholderButton.addEventListener('click', genreButtons)
-placeholderButton.addEventListener('click', filmSrch)
-
 function filmSrch() {
+    // Removes form elements used for recipe search
+    searchLabel.text("What would you like to watch?");
+    searchInput.css("display", "none");
+    searchBttn.css("display", "none");
+
+    // Closes open modal
+    var modal = $("#modal");
+    modal.css("display", "none");
+
+    // Clears recipe cards out of content container
+    contentContainer.text("");
+
     let filmSearchForm = document.createElement('form')
     let filmSearchDiv = document.createElement('div')
     let filmSearchLabel = document.createElement('label')
