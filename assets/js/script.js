@@ -124,11 +124,13 @@ placeholderButton.addEventListener('click', filmSrch)
 
 function filmSrch() {
     let filmSearchForm = document.createElement('form')
+    let description =document.createElement('label')
     let filmSearchDiv = document.createElement('div')
     let filmSearchLabel = document.createElement('label')
     let filmSearchInput = document.createElement('input')
     let filmSearchBtn = document.createElement('button')
     filmSearchForm.classList.add('field')
+    description.classList.add('label')
     filmSearchDiv.classList.add('control')
     filmSearchLabel.classList.add('label')
     filmSearchInput.classList.add('input', 'is-large')
@@ -140,10 +142,13 @@ function filmSrch() {
     filmSearchBtn.innerHTML = 'Search'
 
     filmSearchEl.appendChild(filmSearchForm)
+    filmSearchForm.appendChild(description)
     filmSearchForm.appendChild(filmSearchDiv)
     filmSearchDiv.appendChild(filmSearchLabel)
     filmSearchDiv.appendChild(filmSearchInput)
     filmSearchForm.appendChild(filmSearchBtn)
+
+    description.innerHTML = ("Search for a specific movie or by genre")
 
     filmSearchBtn.addEventListener('click', searchForFilm)
 }
@@ -163,8 +168,10 @@ function genreButtons() {
         .then(data => genFilmBtns(data))
     
     function genFilmBtns(data) {
+        // makes food info disappear
         foodSearch.text("")
         contentContainer.text("");
+
         let genreDiv = document.createElement('div');
         genreDiv.classList.add('genre-buttons')
         filmSearchEl.append(genreDiv)
