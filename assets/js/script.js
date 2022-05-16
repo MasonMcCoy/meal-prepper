@@ -2,6 +2,7 @@
 var homepageButton = document.getElementById('homepage-button')
 var homepage = document.getElementById('homepage')
 document.addEventListener('click' , removeHides)
+var header = document.querySelector('.hero')
 
 // When homepage button is pressed, content appears on page
 function removeHides() {
@@ -168,6 +169,8 @@ function genreButtons() {
         // makes food info disappear
         foodSearch.text("")
         contentContainer.text("");
+        // changes header image
+        header.classList.add('header-movie')
 
         let genreDiv = document.createElement('div');
         genreDiv.classList.add('genre-buttons')

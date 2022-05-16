@@ -32,6 +32,17 @@ body, html {
     color: white;
 }
 
+/* style for header on movie page */
+.header-movie {
+    display: flex;
+    justify-content: center;
+     height: 300px;
+     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/34-1_jthpru.jpg");
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+}
+
 .homepage-button {
     margin-top: 10px;
     display: inline-block;
