@@ -218,6 +218,9 @@ function buildModal() {
     var saveBttn = $("<button>").text("Save").addClass("button");
     var selectBttn = $("<button>").text("Select").addClass("button");
 
+    selectBttn.on('click', genreButtons);
+    selectBttn.on('click', filmSrch);
+
     modalHead.append(modalTitle);
 
     modalFooter.append(saveBttn);
