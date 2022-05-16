@@ -1,7 +1,7 @@
 // homepage
 var homepageButton = document.getElementById('homepage-button')
 var homepage = document.getElementById('homepage')
-document.addEventListener('click' , removeHides)
+homepageButton.addEventListener('click' , removeHides)
 
 // When homepage button is pressed, content appears on page
 function removeHides() {
@@ -11,7 +11,7 @@ function removeHides() {
     header.classList.remove('hide');
     search.classList.remove('hide');
     homepage.classList.add('hide');
-    movieSection.classList.remove('hide');
+    // movieSection.classList.remove('hide');
 //    DOES NOT REMOVE MOVIES HIDE YET
 }
 
@@ -277,6 +277,10 @@ function updateModal(recipeCard) {
     var modRecipeName = $("#recipe-title");
     var modRecipeContent = $("#recipe-content");
 
+    // Resets any existing data
+    modRecipeName.text("");
+    modRecipeContent.text("");
+
     // Updates modal elements with data from data attributes
     modRecipeName.text(recipeCard.dataset.title);
 
@@ -295,7 +299,7 @@ function showModal(event) {
     var parentCon = event.target.parentNode.parentNode;
 
     // Only triggers modal on recipe card click
-    if (parentCon.tagName != "SECTION"){
+    if (parentCon.tagName != "SECTION") {
         return
     }
 
