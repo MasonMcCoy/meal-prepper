@@ -1,7 +1,7 @@
 // homepage
 var homepageButton = document.getElementById('homepage-button')
 var homepage = document.getElementById('homepage')
-document.addEventListener('click' , removeHides)
+homepageButton.addEventListener('click' , removeHides)
 var header = document.querySelector('.hero')
 
 // When homepage button is pressed, content appears on page
@@ -13,7 +13,6 @@ function removeHides() {
     search.classList.remove('hide');
     homepage.classList.add('hide');
     movieSection.classList.remove('hide');
-//    DOES NOT REMOVE MOVIES HIDE YET
 }
 
 // API Credentials
