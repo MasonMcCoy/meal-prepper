@@ -21,6 +21,7 @@ var appKey = "c7d57c2318b4a47dee8151c302c2a3cb";
 
 var searchBttn = $("#search-button");
 var contentContainer = $("#content");
+var foodSearch = $(".food-field")
 
 // Recipe API
 // Captures user input as query term for API call
@@ -162,6 +163,7 @@ function genreButtons() {
         .then(data => genFilmBtns(data))
     
     function genFilmBtns(data) {
+        foodSearch.text("")
         contentContainer.text("");
         let genreDiv = document.createElement('div');
         genreDiv.classList.add('genre-buttons')
@@ -179,6 +181,7 @@ function genreButtons() {
 }
 function getFilms(e) {
     contentContainer.text("");
+
     let genrePick = e.target.attributes[0].textContent
 
     fetch(genreURL)
