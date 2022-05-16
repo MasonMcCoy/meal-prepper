@@ -115,12 +115,9 @@ let discoverURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbK
 let imageBaseURL = 'http://image.tmdb.org/t/p/'
 let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdbKey + '&language=en-US&page=1&query='
 
-let placeholderButton = document.getElementById('placeholder')
+
 let filmSearchEl = document.getElementById('film-search')
 let genreQuery;
-
-placeholderButton.addEventListener('click', genreButtons)
-placeholderButton.addEventListener('click', filmSrch)
 
 function filmSrch() {
     let filmSearchForm = document.createElement('form')
