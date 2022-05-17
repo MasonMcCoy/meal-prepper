@@ -124,7 +124,10 @@ let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdb
 let filmSearchEl = document.getElementById('film-search')
 let genreQuery;
 
-function filmSrch() {
+
+// Creates film search field and button
+
+function filmSearch() {
     // Removes form elements used for recipe search
     searchLabel.text("What would you like to watch?");
     searchInput.css("display", "none");
@@ -142,15 +145,17 @@ function filmSrch() {
     let filmSearchLabel = document.createElement('label')
     let filmSearchInput = document.createElement('input')
     let filmSearchBtn = document.createElement('button')
+    
     filmSearchForm.classList.add('field')
     filmSearchDiv.classList.add('control')
     filmSearchLabel.classList.add('label')
     filmSearchInput.classList.add('input', 'is-large')
     filmSearchBtn.classList.add('button')
+    
     filmSearchInput.setAttribute('type', 'text')
     filmSearchInput.setAttribute('placeholder', 'i.e. Inherent Vice')
     filmSearchInput.setAttribute('id', 'film-search-term')
-    filmSearchBtn.setAttribute('type', 'button')
+    filmSearchBtn.setAttribute('type', 'submit')
     filmSearchBtn.innerHTML = 'Search'
 
     filmSearchEl.appendChild(filmSearchForm)
@@ -159,17 +164,20 @@ function filmSrch() {
     filmSearchDiv.appendChild(filmSearchInput)
     filmSearchForm.appendChild(filmSearchBtn)
 
-    filmSearchBtn.addEventListener('click', searchForFilm)
+    filmSearchForm.addEventListener('click', queryFilm)
 }
 
-function searchForFilm() {
+//Queries film api for search term, displays films if search term returns results
+function queryFilm(e) {
+    e.preventDefault()
     let filmSearch = document.getElementById('film-search-term').value
 
     fetch (filmSearchURL + filmSearch)
         .then(resp => resp.json())
-        .then(data => displayFilms(data))
+        .then(data => displayFilms(data, e))
 }
 
+//Generates genre buttons based on api classifications
 function genreButtons() {
     fetch (genreURL)
         .then(resp => resp.json())
@@ -187,10 +195,13 @@ function genreButtons() {
             genreDiv.appendChild(genreBtn)
         }
         let genreList = document.querySelector('.genre-buttons')
+
         genreList.addEventListener('click', getFilms);
     }
 }
-function getFilms(e) {
+
+//On click of genre button, searches discover API for films of that genre
+function getFilms() {
     contentContainer.text("");
     let genrePick = e.target.attributes[0].textContent
 
@@ -204,6 +215,7 @@ function getFilms(e) {
                 genreQuery = data.genres[i].id
                 }
             }
+        //Randomizes page number of genre query return
         let randoNum = Math.floor(Math.random() * 380)
         fetch(discoverURL + genreQuery + '&page=' + randoNum)
             .then(resp => resp.json())
@@ -234,7 +246,7 @@ function buildModal() {
     var selectBttn = $("<button>").text("Select").addClass("button");
 
     selectBttn.on('click', genreButtons);
-    selectBttn.on('click', filmSrch);
+    selectBttn.on('click', filmSearch);
 
     // Save recipe data
     saveBttn.on('click', saveRecipe);
