@@ -201,7 +201,7 @@ function genreButtons() {
 }
 
 //On click of genre button, searches discover API for films of that genre
-function getFilms() {
+function getFilms(e) {
     contentContainer.text("");
     let genrePick = e.target.attributes[0].textContent
 
