@@ -1,7 +1,7 @@
 // homepage
 var homepageButton = document.getElementById('homepage-button')
 var homepage = document.getElementById('homepage')
-document.addEventListener('click' , removeHides)
+homepageButton.addEventListener('click' , removeHides)
 
 // When homepage button is pressed, content appears on page
 function removeHides() {
@@ -11,14 +11,20 @@ function removeHides() {
     header.classList.remove('hide');
     search.classList.remove('hide');
     homepage.classList.add('hide');
-    movieSection.classList.remove('hide');
-//    DOES NOT REMOVE MOVIES HIDE YET
+    // movieSection.classList.remove('hide');
+    // DOES NOT REMOVE MOVIES HIDE YET
+
+    // Main content box is initially hidden, but revealed once we leave the landing page
+    contentContainer.css("display", "grid");
 }
 
 // API Credentials
 var appID = "4238a1ff";
 var appKey = "c7d57c2318b4a47dee8151c302c2a3cb";
 
+// DOM Variables
+var searchLabel = $("#search-label");
+var searchInput = $("#search-term");
 var searchBttn = $("#search-button");
 var contentContainer = $("#content");
 
@@ -27,7 +33,7 @@ var contentContainer = $("#content");
 function getRecipes(event) {
     event.preventDefault();
 
-    var searchTerm = $("#search-term").val();
+    var searchTerm = searchInput.val();
 
     var baseURL = "https://api.edamam.com/api/recipes/v2?type=public&q=";
     var call = baseURL + searchTerm + "&app_id=" + appID + "&app_key=" + appKey;
@@ -88,6 +94,7 @@ function renderRecipes(recipesResponse) {
         contentContainer.append(recipeCard);
 
         // Link to Recipe (On Modal)
+        
         var recipeLink = recipesResponse[i].recipe.url;
         console.log(recipeLink);
 
@@ -114,14 +121,22 @@ let discoverURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbK
 let imageBaseURL = 'http://image.tmdb.org/t/p/'
 let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdbKey + '&language=en-US&page=1&query='
 
-let placeholderButton = document.getElementById('placeholder')
 let filmSearchEl = document.getElementById('film-search')
 let genreQuery;
 
-placeholderButton.addEventListener('click', genreButtons)
-placeholderButton.addEventListener('click', filmSrch)
-
 function filmSrch() {
+    // Removes form elements used for recipe search
+    searchLabel.text("What would you like to watch?");
+    searchInput.css("display", "none");
+    searchBttn.css("display", "none");
+
+    // Closes open modal
+    var modal = $("#modal");
+    modal.css("display", "none");
+
+    // Clears recipe cards out of content container
+    contentContainer.text("");
+
     let filmSearchForm = document.createElement('form')
     let filmSearchDiv = document.createElement('div')
     let filmSearchLabel = document.createElement('label')
@@ -221,6 +236,9 @@ function buildModal() {
     selectBttn.on('click', genreButtons);
     selectBttn.on('click', filmSrch);
 
+    // Save recipe data
+    saveBttn.on('click', saveRecipe);
+
     modalHead.append(modalTitle);
 
     modalFooter.append(saveBttn);
@@ -277,17 +295,40 @@ function updateModal(recipeCard) {
     var modRecipeName = $("#recipe-title");
     var modRecipeContent = $("#recipe-content");
 
+    // Resets any existing data
+    modRecipeName.text("");
+    modRecipeContent.text("");
+
     // Updates modal elements with data from data attributes
     modRecipeName.text(recipeCard.dataset.title);
 
-    modRecipeContent.append($("<img>").attr("src", recipeCard.dataset.image));
+    modRecipeContent.append($("<img>")
+    .attr("src", recipeCard.dataset.image)
+    .attr("id", "recipe-card-img"));
 
-    modRecipeContent.append($("<h3>").text("Ingredients"));
-    var ingredArr = recipeCard.dataset.ingredients.split(",");
-    for (var i = 0; i < ingredArr.length; i++) {
-        modRecipeContent.append($("<p>").text(ingredArr[i]));
+    if (recipeCard.dataset.prep != 0) {
+        modRecipeContent.append($("<p>")
+        .text("Prep Time: " + recipeCard.dataset.prep)
+        .attr("id", "recipe-card-preptime"));
     }
 
+    modRecipeContent.append($("<h3>")
+    .text("Ingredients"));
+
+    var ingredArr = recipeCard.dataset.ingredients.split(",");
+    
+    for (var i = 0; i < ingredArr.length; i++) {
+        modRecipeContent.append($("<p>")
+        .text(ingredArr[i])
+        .addClass("recipe-card-ingredient"));
+    }
+
+    // Link to recipe source with instructions
+    modRecipeContent.append($("<a>")
+    .text("Learn More")
+    .attr("href", recipeCard.dataset.url)
+    .attr("target", "_blank")
+    .attr("id", "recipe-card-link"));
 }
 
 function showModal(event) {
@@ -295,7 +336,7 @@ function showModal(event) {
     var parentCon = event.target.parentNode.parentNode;
 
     // Only triggers modal on recipe card click
-    if (parentCon.tagName != "SECTION"){
+    if (parentCon.tagName != "SECTION") {
         return
     }
 
@@ -313,6 +354,30 @@ function showModal(event) {
             modal.css("display", "none");
         }
     }
+}
+
+// Saves a recipe to local storage
+function saveRecipe() {
+    
+    var savedIngredients = [];
+
+    // Stores ingredients in an array
+    for (var i = 0; i < ($(".recipe-card-ingredient")).length; i++) {
+        savedIngredients.push(($(".recipe-card-ingredient"))[i].innerHTML);
+    }
+
+    // Isolated numeric value
+    var savedPrep = ($("#recipe-card-preptime").text()).split(" ");
+
+    // Recipe object to be passed as value in local storage
+    var recipeObj = {
+        image: $("#recipe-card-img").attr("src"),
+        preptime: savedPrep[2],
+        ingredients: savedIngredients,
+        url: $("#recipe-card-link").attr("href")
+    };
+
+    localStorage.setItem($("#recipe-title").text(), JSON.stringify(recipeObj));
 }
 
 searchBttn.on("click", getRecipes);

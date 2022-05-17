@@ -104,7 +104,7 @@ section {
 }
 
 #content {
-    display: grid;
+    display: none;
     grid-template-columns: repeat(4, 1fr);
     margin: 40px 40px;
     padding: 10px 10px;
