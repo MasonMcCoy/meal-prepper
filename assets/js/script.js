@@ -94,6 +94,7 @@ function renderRecipes(recipesResponse) {
         contentContainer.append(recipeCard);
 
         // Link to Recipe (On Modal)
+        
         var recipeLink = recipesResponse[i].recipe.url;
         console.log(recipeLink);
 
@@ -235,7 +236,8 @@ function buildModal() {
     selectBttn.on('click', genreButtons);
     selectBttn.on('click', filmSrch);
 
-    saveBttn.on('click', saveCard);
+    // Save recipe data
+    saveBttn.on('click', saveRecipe);
 
     modalHead.append(modalTitle);
 
@@ -300,14 +302,33 @@ function updateModal(recipeCard) {
     // Updates modal elements with data from data attributes
     modRecipeName.text(recipeCard.dataset.title);
 
-    modRecipeContent.append($("<img>").attr("src", recipeCard.dataset.image).attr("id", "recipe-card-img"));
+    modRecipeContent.append($("<img>")
+    .attr("src", recipeCard.dataset.image)
+    .attr("id", "recipe-card-img"));
 
-    modRecipeContent.append($("<h3>").text("Ingredients"));
-    var ingredArr = recipeCard.dataset.ingredients.split(",");
-    for (var i = 0; i < ingredArr.length; i++) {
-        modRecipeContent.append($("<p>").text(ingredArr[i]));
+    if (recipeCard.dataset.prep != 0) {
+        modRecipeContent.append($("<p>")
+        .text("Prep Time: " + recipeCard.dataset.prep)
+        .attr("id", "recipe-card-preptime"));
     }
 
+    modRecipeContent.append($("<h3>")
+    .text("Ingredients"));
+
+    var ingredArr = recipeCard.dataset.ingredients.split(",");
+    
+    for (var i = 0; i < ingredArr.length; i++) {
+        modRecipeContent.append($("<p>")
+        .text(ingredArr[i])
+        .addClass("recipe-card-ingredient"));
+    }
+
+    // Link to recipe source with instructions
+    modRecipeContent.append($("<a>")
+    .text("Learn More")
+    .attr("href", recipeCard.dataset.url)
+    .attr("target", "_blank")
+    .attr("id", "recipe-card-link"));
 }
 
 function showModal(event) {
@@ -337,9 +358,23 @@ function showModal(event) {
 
 // Saves a recipe to local storage
 function saveRecipe() {
+    
+    var savedIngredients = [];
+
+    // Stores ingredients in an array
+    for (var i = 0; i < ($(".recipe-card-ingredient")).length; i++) {
+        savedIngredients.push(($(".recipe-card-ingredient"))[i].innerHTML);
+    }
+
+    // Isolated numeric value
+    var savedPrep = ($("#recipe-card-preptime").text()).split(" ");
+
+    // Recipe object to be passed as value in local storage
     var recipeObj = {
         image: $("#recipe-card-img").attr("src"),
-        ingredients: $("#recipe-content").text()
+        preptime: savedPrep[2],
+        ingredients: savedIngredients,
+        url: $("#recipe-card-link").attr("href")
     };
 
     localStorage.setItem($("#recipe-title").text(), JSON.stringify(recipeObj));
