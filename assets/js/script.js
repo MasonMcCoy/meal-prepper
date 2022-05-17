@@ -235,6 +235,8 @@ function buildModal() {
     selectBttn.on('click', genreButtons);
     selectBttn.on('click', filmSrch);
 
+    saveBttn.on('click', saveCard);
+
     modalHead.append(modalTitle);
 
     modalFooter.append(saveBttn);
@@ -298,7 +300,7 @@ function updateModal(recipeCard) {
     // Updates modal elements with data from data attributes
     modRecipeName.text(recipeCard.dataset.title);
 
-    modRecipeContent.append($("<img>").attr("src", recipeCard.dataset.image));
+    modRecipeContent.append($("<img>").attr("src", recipeCard.dataset.image).attr("id", "recipe-card-img"));
 
     modRecipeContent.append($("<h3>").text("Ingredients"));
     var ingredArr = recipeCard.dataset.ingredients.split(",");
@@ -331,6 +333,16 @@ function showModal(event) {
             modal.css("display", "none");
         }
     }
+}
+
+// Saves a recipe to local storage
+function saveRecipe() {
+    var recipeObj = {
+        image: $("#recipe-card-img").attr("src"),
+        ingredients: $("#recipe-content").text()
+    };
+
+    localStorage.setItem($("#recipe-title").text(), JSON.stringify(recipeObj));
 }
 
 searchBttn.on("click", getRecipes);
