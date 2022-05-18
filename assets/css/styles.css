@@ -204,6 +204,7 @@ text-align: center;
     justify-content: center;
     align-items: center;
     align-content: center;
+    flex-direction: column;
     height: 100%;
     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/IMG_4417_o0znjm.jpg");
     background-position: center;
@@ -211,6 +212,18 @@ text-align: center;
     background-size: cover;
     color: white;
 }
+
+.final-page-title {
+    display: flex;
+    justify-content: center;
+}
+
+.final-page-subheader {
+    display: flex;
+    justify-content: center;
+
+}
+
 /* class to add to elements to hide them  */
 .hide {
     display: none;

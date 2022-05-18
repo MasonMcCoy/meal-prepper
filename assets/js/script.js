@@ -491,12 +491,18 @@ function displaySavedRecipes(savedRecipes) {
 
 function finalPage() {
     // clears out all existing content
+    let contentCont = document.getElementById('content')
+    contentCont.classList.add('hide')
    header.classList.add('hide')
    let main = document.querySelector('#content')
    main.classList.add('hide')
    let filmSearch = document.querySelector('#film-search')
    filmSearch.classList.add('hide')
-    // dynamically create elements
-    
+   let finalPageContent = document.getElementById('final-page')
+   finalPageContent.classList.remove('hide')
+   finalPageContent.classList.add('final-page')
+   backToHomepage.classList.remove('hide')
+
+    // unhides that page
 
 }
