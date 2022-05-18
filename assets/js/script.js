@@ -5,9 +5,12 @@ homepageButton.addEventListener('click' , removeHides)
 var header = document.querySelector('.hero')
 var movieSection = document.querySelector('.section');
 var placeholderButton = document.getElementById('placeholder')
-placeholderButton.addEventListener('click', finalPage)
+placeholderButton.addEventListener('click', refreshPage)
 
-
+// goes back to homepage and clears cache
+function refreshPage() {
+    location.reload()
+}
 // When homepage button is pressed, content appears on page
 function removeHides() {
     var header = document.querySelector('.hero');
@@ -199,6 +202,7 @@ function genreButtons() {
         foodSearch.text("")
         contentContainer.text("");
         // changes header image
+        header.classList.remove('header-food')
         header.classList.add('header-movie')
 
         let genreDiv = document.createElement('div');
@@ -401,6 +405,7 @@ function saveRecipe() {
 
     // Recipe object to be passed as value in local storage
     var recipeObj = {
+        // name: 
         image: $("#recipe-card-img").attr("src"),
         preptime: savedPrep[2],
         ingredients: savedIngredients,
@@ -438,6 +443,8 @@ function pullSavedRecipe() {
         }
         return values;
 }
+
+// {name: "Smothered Chicken", Recipe: "object"}
 
 console.log(savedRecipes)
 
