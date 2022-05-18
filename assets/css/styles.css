@@ -44,6 +44,16 @@ body, html {
      background-size: cover;
 }
 
+.header-saved-recipes {
+    display: flex;
+    justify-content: center;
+     height: 300px;
+     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652563929/Project1-Images/1539273371768-w2880-ab_iahilf.jpg");
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+}
+
 .homepage-button {
     margin-top: 10px;
     display: inline-block;

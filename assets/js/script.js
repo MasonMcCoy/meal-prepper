@@ -417,3 +417,64 @@ function saveRecipe() {
 searchBttn.on("click", getRecipes);
 
 contentContainer.on("click", showModal);
+
+//Saved recipe page
+
+let savedRecipes = pullSavedRecipe()
+let savedRecipeBtn = document.getElementById('saved-recipes')
+savedRecipeBtn.addEventListener('click', savedRecipePage)
+// savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
+
+function savedRecipePage() {
+    contentContainer.text('')
+    filmSearchEl.classList.add('hide')
+    foodSearch.addClass('hide')
+    header.classList.add('header-saved-recipes')
+}
+
+function pullSavedRecipe() {
+        var values = [],
+            keys = Object.keys(localStorage),
+            i = keys.length;
+    
+        while ( i-- ) {
+            values.push( localStorage.getItem(keys[i]) );
+        }
+        return values;
+}
+
+console.log(savedRecipes)
+
+function displaySavedRecipes(savedRecipes) {
+    buildModal();
+
+    for (var i = 0; i < savedRecipes.length; i++) {
+        var recipeCard = $("<section>").addClass("card");
+        
+        // Create data attributes
+        recipeCard.attr("data-title", savedRecipes[i].label);
+        recipeCard.attr("data-image", savedRecipes[i].images.REGULAR.url);
+        recipeCard.attr("data-url", savedRecipes[i].url);
+        recipeCard.attr("data-ingredients", savedRecipes[i].ingredientLines);
+
+        // CARD TITLE
+        var recipeName = $("<div>").addClass("card-header");
+        
+        // Recipe Name
+        recipeName.append($("<div>").addClass("card-header-title").text(savedRecipes[i].label));
+        console.log(savedRecipes[i].label);
+
+        // CARD IMAGE
+        var recipeImg = $("<figure>").addClass("image is-4by3")
+        .append($("<img>").attr("src", savedRecipes[i].images.REGULAR.url));
+
+        // CARD FOOTER
+        var recipeData = $("<div>").addClass("card-footer");
+
+        recipeCard.append(recipeName);
+        recipeCard.append(recipeImg);
+        recipeCard.append(recipeData);
+
+        contentContainer.append(recipeCard);
+}
+}
