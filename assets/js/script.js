@@ -6,6 +6,8 @@ var header = document.querySelector('.hero')
 var movieSection = document.querySelector('.section');
 var backToHomepage = document.getElementById('back-to-homepage-btn')
 var placeholderButton = document.getElementById('placeholder')
+
+// clears movie info to make room for final page
 placeholderButton.addEventListener('click', finalPage)
 backToHomepage.addEventListener('click', refreshPage)
 
