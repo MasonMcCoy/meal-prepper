@@ -8,6 +8,7 @@ body, html {
 /* homepage styles */
 .homepage {
     display: flex;
+    margin: 0;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -30,6 +31,17 @@ body, html {
     justify-content: center;
     font-size: 4em;
     color: white;
+}
+
+/* style for header on movie page */
+.header-movie {
+    display: flex;
+    justify-content: center;
+     height: 300px;
+     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652732062/Project1-Images/15625958_1293213694032209_8085771310300142218_o_ifwzwk.jpg");
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
 }
 
 .homepage-button {
@@ -69,9 +81,7 @@ header {
 
 .saved-recipes {
     display: inline-block;
-    
     margin-top: 80px;
-
 }
 
 li:hover {
@@ -158,14 +168,22 @@ text-align: center;
 }
 
 .genre-buttons button {
-    margin: .5rem;
-    border-radius: 5px;
-    background-color: rgb(24, 255, 197);
-    padding: .25rem .4rem;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 900;
+    margin-top: 10px;
+    color: white;
+    background-color: rgb(173, 33, 14);
+    border-color: rgb(126, 23, 10);
 }
 
+.title-2 {
+    font-size: 5em;
+    color: rgb(173, 33, 14);
+}
+
+.homepage-hide {
+    display: none;
+    padding: 0;
+    margin: 0;
+}
 /* class to add to elements to hide them  */
 .hide {
     display: none;

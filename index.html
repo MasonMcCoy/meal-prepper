@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <title>Homebuddy</title>
@@ -21,13 +22,14 @@
         <div id="homepage" class="homepage">
             <div id="homepage-content" class="homepage-content">
             <h1 class="homepage-header">Homebuddy</h1>
+            <h2>Don't go out to have fun... Customize the perfect evening in.</h2>
             <button id="homepage-button" class="homepage-button">Create your Evening</button>
         </div>
         </div>
         <!-- end of homepage -->
 
         <!-- recipes page -->
-        <form class="field hide">
+        <form class="field food-field hide">
             <div class="control">
                 <label class="label" id="search-label">What would you like to have for dinner?</label>
                 <input class="input is-large" id="search-term" type="text" placeholder="i.e. Chicken Salad">
@@ -36,12 +38,19 @@
         </form>
 
 
+
         <!-- Area film search bar and genre buttons populate -->
 
         <div id="film-search"></div>
 
         <main id="content"></main>
 
+        <!-- final page -->
+        <div class="final-page" id="final-page">
+            <h1 class="title-2"></h1>
+                <h2></h2>
+        </div>
+        <!-- end final page -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="./assets/js/config.js"></script>
         <script src="./assets/js/script.js"></script>

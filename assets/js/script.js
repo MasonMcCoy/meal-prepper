@@ -2,15 +2,20 @@
 var homepageButton = document.getElementById('homepage-button')
 var homepage = document.getElementById('homepage')
 homepageButton.addEventListener('click' , removeHides)
+var header = document.querySelector('.hero')
+
+
 
 // When homepage button is pressed, content appears on page
 function removeHides() {
     var header = document.querySelector('.hero');
-    var search = document.querySelector('.field');
+    var search = document.querySelector('.food-field');
     var movieSection = document.querySelector('.section');
     header.classList.remove('hide');
     search.classList.remove('hide');
     homepage.classList.add('hide');
+
+
     // movieSection.classList.remove('hide');
     // DOES NOT REMOVE MOVIES HIDE YET
 
@@ -27,6 +32,7 @@ var searchLabel = $("#search-label");
 var searchInput = $("#search-term");
 var searchBttn = $("#search-button");
 var contentContainer = $("#content");
+var foodSearch = $(".food-field")
 
 // Recipe API
 // Captures user input as query term for API call
@@ -121,6 +127,7 @@ let discoverURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbK
 let imageBaseURL = 'http://image.tmdb.org/t/p/'
 let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdbKey + '&language=en-US&page=1&query='
 
+
 let filmSearchEl = document.getElementById('film-search')
 let genreQuery;
 
@@ -140,13 +147,16 @@ function filmSearch() {
     // Clears recipe cards out of content container
     contentContainer.text("");
 
+
     let filmSearchForm = document.createElement('form')
+    let description =document.createElement('label')
     let filmSearchDiv = document.createElement('div')
     let filmSearchLabel = document.createElement('label')
     let filmSearchInput = document.createElement('input')
     let filmSearchBtn = document.createElement('button')
     
     filmSearchForm.classList.add('field')
+    description.classList.add('label')
     filmSearchDiv.classList.add('control')
     filmSearchLabel.classList.add('label')
     filmSearchInput.classList.add('input', 'is-large')
@@ -159,10 +169,14 @@ function filmSearch() {
     filmSearchBtn.innerHTML = 'Search'
 
     filmSearchEl.appendChild(filmSearchForm)
+    filmSearchForm.appendChild(description)
     filmSearchForm.appendChild(filmSearchDiv)
     filmSearchDiv.appendChild(filmSearchLabel)
     filmSearchDiv.appendChild(filmSearchInput)
     filmSearchForm.appendChild(filmSearchBtn)
+
+
+    description.innerHTML = ("Search for a specific movie or by genre")
 
     filmSearchForm.addEventListener('click', queryFilm)
 }
@@ -174,6 +188,7 @@ function queryFilm(e) {
 
     fetch (filmSearchURL + filmSearch)
         .then(resp => resp.json())
+
         .then(data => displayFilms(data, e))
 }
 
@@ -184,6 +199,12 @@ function genreButtons() {
         .then(data => genFilmBtns(data))
     
     function genFilmBtns(data) {
+        // makes food info disappear
+        foodSearch.text("")
+        contentContainer.text("");
+        // changes header image
+        header.classList.add('header-movie')
+
         let genreDiv = document.createElement('div');
         genreDiv.classList.add('genre-buttons')
         filmSearchEl.append(genreDiv)
@@ -203,6 +224,7 @@ function genreButtons() {
 //On click of genre button, searches discover API for films of that genre
 function getFilms(e) {
     contentContainer.text("");
+
     let genrePick = e.target.attributes[0].textContent
 
     fetch(genreURL)
