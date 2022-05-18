@@ -38,11 +38,33 @@ body, html {
     display: flex;
     justify-content: center;
      height: 300px;
-     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652889297/Project1-Images/Movie_Night_asdkk5.png");
+     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652912387/Project1-Images/Movie_Night_asdkk5_wl7tsf.png");
      background-position: center;
      background-repeat: no-repeat;
      background-size: cover;
 }
+
+.header-food {
+    display: flex;
+   justify-content: center;
+    height: 300px;
+    background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559609/Project1-Images/GettyImages_1032865588_c3pry7.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-saved-recipes {
+    display: flex;
+   justify-content: center;
+    height: 300px;
+    background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652563929/Project1-Images/1539273371768-w2880-ab_iahilf.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 
 .homepage-button {
     margin-top: 10px;
@@ -59,27 +81,13 @@ body, html {
   
 }
 
-
-button:hover {
-   background-color: rgb(126, 23, 10);
-   cursor: pointer;
-   color: white;
-}
-
 /* styles for recipes page */
-
-/* header */
-.header-food {
+.links {
     display: flex;
-   justify-content: center;
-    height: 300px;
-    background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559609/Project1-Images/GettyImages_1032865588_c3pry7.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    justify-content: space-between;
 }
 
-.saved-recipes {
+li {
     display: inline-block;
     margin-top: 80px;
 }
@@ -89,6 +97,11 @@ li:hover {
    cursor: pointer;
 }
 
+button:hover {
+   background-color: rgb(126, 23, 10);
+   cursor: pointer;
+   color: white;
+}
 .title  {
     font-size: 5em;
 }

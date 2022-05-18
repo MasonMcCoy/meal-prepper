@@ -420,16 +420,19 @@ searchBttn.on("click", getRecipes);
 contentContainer.on("click", showModal);
 
 //Saved recipe page
-
 let savedRecipes = pullSavedRecipe()
 let savedRecipeBtn = document.getElementById('saved-recipes')
 savedRecipeBtn.addEventListener('click', savedRecipePage)
 // savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
 
 function savedRecipePage() {
+    // clears existing header styles and content
     contentContainer.text('')
     filmSearchEl.classList.add('hide')
     foodSearch.addClass('hide')
+    header.classList.remove('header-food')
+    header.classList.remove('header-movie')
+    header.classList.add('header-saved-recipes')
     
 }
 
