@@ -4,6 +4,9 @@ var homepage = document.getElementById('homepage')
 homepageButton.addEventListener('click' , removeHides)
 var header = document.querySelector('.hero')
 var movieSection = document.querySelector('.section');
+var placeholderButton = document.getElementById('placeholder')
+placeholderButton.addEventListener('click', finalPage)
+let blankPage = document.getElementById('document')
 
 // When homepage button is pressed, content appears on page
 function removeHides() {
@@ -422,7 +425,7 @@ function savedRecipePage() {
     contentContainer.text('')
     filmSearchEl.classList.add('hide')
     foodSearch.addClass('hide')
-    header.classList.add('header-saved-recipes')
+    
 }
 
 function pullSavedRecipe() {
@@ -470,4 +473,10 @@ function displaySavedRecipes(savedRecipes) {
 
         contentContainer.append(recipeCard);
 }
+}
+
+function finalPage() {
+    // clears out all existing content
+    blankPage.classList.add('hide')
+
 }
