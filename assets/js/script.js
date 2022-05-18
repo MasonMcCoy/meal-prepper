@@ -4,8 +4,10 @@ var homepage = document.getElementById('homepage')
 homepageButton.addEventListener('click' , removeHides)
 var header = document.querySelector('.hero')
 var movieSection = document.querySelector('.section');
+var backToHomepage = document.getElementById('back-to-homepage-btn')
 var placeholderButton = document.getElementById('placeholder')
-placeholderButton.addEventListener('click', refreshPage)
+placeholderButton.addEventListener('click', finalPage)
+backToHomepage.addEventListener('click', refreshPage)
 
 // goes back to homepage and clears cache
 function refreshPage() {
