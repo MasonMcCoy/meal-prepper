@@ -6,7 +6,7 @@ var header = document.querySelector('.hero')
 var movieSection = document.querySelector('.section');
 var placeholderButton = document.getElementById('placeholder')
 placeholderButton.addEventListener('click', finalPage)
-let blankPage = document.getElementById('document')
+
 
 // When homepage button is pressed, content appears on page
 function removeHides() {
@@ -477,6 +477,12 @@ function displaySavedRecipes(savedRecipes) {
 
 function finalPage() {
     // clears out all existing content
-    blankPage.classList.add('hide')
+   header.classList.add('hide')
+   let main = document.querySelector('#content')
+   main.classList.add('hide')
+   let filmSearch = document.querySelector('#film-search')
+   filmSearch.classList.add('hide')
+    // dynamically create elements
+    
 
 }
