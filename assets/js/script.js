@@ -3,22 +3,16 @@ var homepageButton = document.getElementById('homepage-button')
 var homepage = document.getElementById('homepage')
 homepageButton.addEventListener('click' , removeHides)
 var header = document.querySelector('.hero')
-
-
+var movieSection = document.querySelector('.section');
 
 // When homepage button is pressed, content appears on page
 function removeHides() {
     var header = document.querySelector('.hero');
     var search = document.querySelector('.food-field');
-    var movieSection = document.querySelector('.section');
     header.classList.remove('hide');
+    header.classList.add('header-food')
     search.classList.remove('hide');
     homepage.classList.add('hide');
-
-
-    // movieSection.classList.remove('hide');
-    // DOES NOT REMOVE MOVIES HIDE YET
-
     // Main content box is initially hidden, but revealed once we leave the landing page
     contentContainer.css("display", "grid");
 }
@@ -39,8 +33,7 @@ var foodSearch = $(".food-field")
 function getRecipes(event) {
     event.preventDefault();
 
-    var searchTerm = searchInput.val();
-
+    var searchTerm = searchInput.val()
     var baseURL = "https://api.edamam.com/api/recipes/v2?type=public&q=";
     var call = baseURL + searchTerm + "&app_id=" + appID + "&app_key=" + appKey;
 
