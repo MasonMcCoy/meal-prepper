@@ -8,7 +8,7 @@ Everyone wants an evening in, whether it be by themselves or with friends. With 
 Mason McCoy,
 Roya Jamshidpour,
 Catie O'Connor,
-Ian (?)
+Ian Sieg
 
 
 ### Here is a link to the Homebuddy app!
