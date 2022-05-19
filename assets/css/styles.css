@@ -215,25 +215,40 @@ text-align: center;
     align-content: center;
     flex-direction: column;
     height: 100%;
+    width: auto;
     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/IMG_4417_o0znjm.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
 }
-
+/* final page header */
 .final-page-header {
-    display: inline-block;
-    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 95%;
+    height: auto;
     
+}
+/* button styles */
+.saved-recipes {
+display: flex;
+justify-content: space-between;
+}
+
+/* button styles */
+.back-to-homepage-btn {
+    display: flex;
+    justify-content: space-between;
 }
 
 .final-page-title {
-    display: flex;
-    justify-content: center;
+    display: inline-block;
     align-items: center;
     color: white;
     font-size: 3em;
+    width: auto;
     background-color: rgba(0,0,0,.5);
     padding: 5px;
     border-radius: 5px;
@@ -241,6 +256,8 @@ text-align: center;
 
 .final-page-subheader {
     display: flex;
+    height: 20%;
+    width: auto;
     justify-content: center;
 }
 
