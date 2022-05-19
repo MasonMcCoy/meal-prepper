@@ -197,7 +197,7 @@ text-align: center;
     padding: 0;
     margin: 0;
 }
-
+/* final page styles */
 .final-page {
     display: flex;
     margin: 0;
@@ -218,17 +218,15 @@ text-align: center;
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 2em;
+    font-size: 3em;
     background-color: rgba(0,0,0,.5);
     padding: 5px;
     border-radius: 5px;
-
 }
 
 .final-page-subheader {
     display: flex;
     justify-content: center;
-
 }
 
 /* class to add to elements to hide them  */
