@@ -492,7 +492,6 @@ function displaySavedRecipes(savedRecipes) {
 function finalPage() {
     // clears out all existing content
     let contentCont = document.getElementById('content')
-    contentCont.classList.add('hide')
    header.classList.add('hide')
    let main = document.querySelector('#content')
    main.classList.add('hide')
