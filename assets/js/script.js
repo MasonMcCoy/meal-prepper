@@ -121,7 +121,7 @@ function renderRecipes(recipesResponse) {
     }
 }
 
-// Movie API
+// Movie API===========================================================================================================
 
 // Movie API Variables
 const tmdbKey = 'e86784e99f17cd9b8e35fcc922379812'
@@ -133,6 +133,10 @@ let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdb
 
 let filmSearchEl = document.getElementById('film-search')
 let genreQuery;
+
+let filmPageBtn = document.getElementById('film-placeholder')
+filmPageBtn.addEventListener('click', filmSearch)
+filmPageBtn.addEventListener('click', genreButtons)
 
 
 // Creates film search field and button
@@ -250,7 +254,6 @@ function getFilms(e) {
         }
     }
     
-//poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
 
 function buildModal() {
     var modal = $("<div>").addClass("modal").attr("id", "modal");
@@ -300,7 +303,7 @@ function displayFilms(data) {
     console.log(data)
     contentContainer.text("");
     for (let i = 0; i < 16; i++) {
-        let filmDiv = document.createElement('section')
+        let filmDiv = document.createElement('div') //changed from section
         filmDiv.classList.add('card', 'film-section')
         let filmDivFace = document.createElement('div')
         filmDivFace.classList.add('film-face')
@@ -311,22 +314,46 @@ function displayFilms(data) {
         let filmPicEl = document.createElement('img')
         let filmScoreEl = document.createElement('h2')
         let filmInfoEl = document.createElement('p')
+        let filmSelectBtn = document.createElement('button')
         
-        filmTitleEl.innerHTML = '<strong>' + data.results[i].title + '</strong>';
-        filmPicEl.setAttribute('src', imageBaseURL + '/w342/' + data.results[i].poster_path)
-        filmScoreEl.innerHTML = '<strong>' + data.results[i].vote_average + '</strong>'  + '/10'
+        filmTitleEl.textContent = data.results[i].title;
+        filmTitleEl.classList.add('film-title')
+        filmPicEl.setAttribute('src', imageBaseURL + '/w780/' + data.results[i].poster_path)
+        let posterPath = imageBaseURL + '/w780/' + data.results[i].poster_path
+        filmScoreEl.innerHTML = data.results[i].vote_average + '/10'
         filmInfoEl.textContent = data.results[i].overview
-        filmDivFace.appendChild(filmTitleEl)
+
+        filmSelectBtn.setAttribute('class', 'select-film')
+        filmSelectBtn.setAttribute('data-title', data.results[i].title)
+        filmSelectBtn.setAttribute('data-pic', posterPath)
+        filmSelectBtn.setAttribute('data-score', data.results[i].vote_average+ '/10')
+        filmSelectBtn.setAttribute('data-info', data.results[i].overview)
+
+        filmSelectBtn.innerHTML = 'Select'
+        filmSelectBtn.addEventListener('click', selectFilm)
+
+        filmDiv.appendChild(filmTitleEl)
         filmDivFace.appendChild(filmPicEl)
         filmDivBody.appendChild(filmScoreEl)
         filmDivBody.appendChild(filmInfoEl)
+        filmDivBody.appendChild(filmSelectBtn)
         filmDiv.appendChild(filmDivFace)
         filmDiv.appendChild(filmDivBody)
         contentContainer.append(filmDiv)
     }
 }
 
-//poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
+function selectFilm() {
+    let filmObj = {
+        title: this.dataset.title,
+        pic: this.dataset.pic,
+        score: this.dataset.score,
+        info: this.dataset.info
+    }
+    localStorage.setItem('film', JSON.stringify(filmObj))
+}
+
+//poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"==========================================================
 
 function updateModal(recipeCard) {
     // Modal elements
