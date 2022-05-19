@@ -90,8 +90,8 @@ function renderRecipes(recipesResponse) {
         console.log(recipesResponse[i].recipe.cuisineType[0]);
 
         // Prep Time
-        recipeData.append($("<div>").addClass("card-footer-item").text(recipesResponse[i].recipe.totalTime));
-        console.log(recipesResponse[i].recipe.totalTime);
+        // recipeData.append($("<div>").addClass("card-footer-item").text(recipesResponse[i].recipe.totalTime));
+        // console.log(recipesResponse[i].recipe.totalTime);
 
         recipeCard.append(recipeName);
         recipeCard.append(recipeImg);
@@ -342,7 +342,7 @@ function updateModal(recipeCard) {
 
     if (recipeCard.dataset.prep != 0) {
         modRecipeContent.append($("<p>")
-        .text("Prep Time: " + recipeCard.dataset.prep)
+        
         .attr("id", "recipe-card-preptime"));
     }
 
