@@ -4,7 +4,17 @@ var homepage = document.getElementById('homepage')
 homepageButton.addEventListener('click' , removeHides)
 var header = document.querySelector('.hero')
 var movieSection = document.querySelector('.section');
+var backToHomepage = document.getElementById('back-to-homepage-btn')
+var placeholderButton = document.getElementById('placeholder')
 
+// clears movie info to make room for final page
+placeholderButton.addEventListener('click', finalPage)
+backToHomepage.addEventListener('click', refreshPage)
+
+// goes back to homepage and clears cache
+function refreshPage() {
+    location.reload()
+}
 // When homepage button is pressed, content appears on page
 function removeHides() {
     var header = document.querySelector('.hero');
@@ -196,6 +206,7 @@ function genreButtons() {
         foodSearch.text("")
         contentContainer.text("");
         // changes header image
+        header.classList.remove('header-food')
         header.classList.add('header-movie')
 
         let genreDiv = document.createElement('div');
@@ -398,6 +409,7 @@ function saveRecipe() {
 
     // Recipe object to be passed as value in local storage
     var recipeObj = {
+        // name: 
         image: $("#recipe-card-img").attr("src"),
         preptime: savedPrep[2],
         ingredients: savedIngredients,
@@ -412,17 +424,20 @@ searchBttn.on("click", getRecipes);
 contentContainer.on("click", showModal);
 
 //Saved recipe page
-
 let savedRecipes = pullSavedRecipe()
 let savedRecipeBtn = document.getElementById('saved-recipes')
 savedRecipeBtn.addEventListener('click', savedRecipePage)
 // savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
 
 function savedRecipePage() {
+    // clears existing header styles and content
     contentContainer.text('')
     filmSearchEl.classList.add('hide')
     foodSearch.addClass('hide')
+    header.classList.remove('header-food')
+    header.classList.remove('header-movie')
     header.classList.add('header-saved-recipes')
+    
 }
 
 function pullSavedRecipe() {
@@ -435,6 +450,8 @@ function pullSavedRecipe() {
         }
         return values;
 }
+
+// {name: "Smothered Chicken", Recipe: "object"}
 
 console.log(savedRecipes)
 
@@ -470,4 +487,21 @@ function displaySavedRecipes(savedRecipes) {
 
         contentContainer.append(recipeCard);
 }
+}
+
+function finalPage() {
+    // clears out all existing content
+    let contentCont = document.getElementById('content')
+   header.classList.add('hide')
+   let main = document.querySelector('#content')
+   main.classList.add('hide')
+   let filmSearch = document.querySelector('#film-search')
+   filmSearch.classList.add('hide')
+   let finalPageContent = document.getElementById('final-page')
+   finalPageContent.classList.remove('hide')
+   finalPageContent.classList.add('final-page')
+   backToHomepage.classList.remove('hide')
+
+    // unhides that page
+
 }
