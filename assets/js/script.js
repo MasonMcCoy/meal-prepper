@@ -37,6 +37,7 @@ var searchInput = $("#search-term");
 var searchBttn = $("#search-button");
 var contentContainer = $("#content");
 var foodSearch = $(".food-field")
+var savedRecipes = $("#saved-recipes");
 
 // Recipe API
 // Captures user input as query term for API call
@@ -419,75 +420,115 @@ function saveRecipe() {
     localStorage.setItem($("#recipe-title").text(), JSON.stringify(recipeObj));
 }
 
-searchBttn.on("click", getRecipes);
+function renderSaved() {
+    contentContainer.text("");
+    filmSearchEl.style.display = "none";
 
-contentContainer.on("click", showModal);
-
-//Saved recipe page
-let savedRecipes = pullSavedRecipe()
-let savedRecipeBtn = document.getElementById('saved-recipes')
-savedRecipeBtn.addEventListener('click', savedRecipePage)
-// savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
-
-function savedRecipePage() {
-    // clears existing header styles and content
-    contentContainer.text('')
-    filmSearchEl.classList.add('hide')
-    foodSearch.addClass('hide')
-    header.classList.remove('header-food')
-    header.classList.remove('header-movie')
-    header.classList.add('header-saved-recipes')
-    
-}
-
-function pullSavedRecipe() {
-        var values = [],
-            keys = Object.keys(localStorage),
-            i = keys.length;
-    
-        while ( i-- ) {
-            values.push( localStorage.getItem(keys[i]) );
-        }
-        return values;
-}
-
-// {name: "Smothered Chicken", Recipe: "object"}
-
-console.log(savedRecipes)
-
-function displaySavedRecipes(savedRecipes) {
-    buildModal();
-
-    for (var i = 0; i < savedRecipes.length; i++) {
-        var recipeCard = $("<section>").addClass("card");
+    for (var i = 0; i < localStorage.length; i++) {
         
-        // Create data attributes
-        recipeCard.attr("data-title", savedRecipes[i].label);
-        recipeCard.attr("data-image", savedRecipes[i].images.REGULAR.url);
-        recipeCard.attr("data-url", savedRecipes[i].url);
-        recipeCard.attr("data-ingredients", savedRecipes[i].ingredientLines);
+        var savedObj = localStorage.getItem(localStorage.key(i));
+        
+        var parsedObj = JSON.parse(savedObj);
+
+        var savedCard = $("<section>").addClass("card");
 
         // CARD TITLE
         var recipeName = $("<div>").addClass("card-header");
         
         // Recipe Name
-        recipeName.append($("<div>").addClass("card-header-title").text(savedRecipes[i].label));
-        console.log(savedRecipes[i].label);
+        recipeName.append($("<div>").addClass("card-header-title").text(localStorage.key(i)));
 
         // CARD IMAGE
         var recipeImg = $("<figure>").addClass("image is-4by3")
-        .append($("<img>").attr("src", savedRecipes[i].images.REGULAR.url));
+        .append($("<img>").attr("src", parsedObj.image));
 
         // CARD FOOTER
         var recipeData = $("<div>").addClass("card-footer");
 
-        recipeCard.append(recipeName);
-        recipeCard.append(recipeImg);
-        recipeCard.append(recipeData);
+        savedCard.append(recipeName);
+        savedCard.append(recipeImg);
+        savedCard.append(recipeData);
 
-        contentContainer.append(recipeCard);
+        contentContainer.append(savedCard);
+
+        console.log(parsedObj.image);
+        console.log(parsedObj.preptime);
+        console.log(parsedObj.ingredients);
+        console.log(parsedObj.url);
+    }
 }
-}
+
+searchBttn.on("click", getRecipes);
+
+contentContainer.on("click", showModal);
+
+savedRecipes.on("click", renderSaved)
+
+// //Saved recipe page
+// let savedRecipes = pullSavedRecipe()
+// let savedRecipeBtn = document.getElementById('saved-recipes')
+// savedRecipeBtn.addEventListener('click', savedRecipePage)
+// // savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
+
+// function savedRecipePage() {
+//     // clears existing header styles and content
+//     contentContainer.text('')
+//     filmSearchEl.classList.add('hide')
+//     foodSearch.addClass('hide')
+//     header.classList.remove('header-food')
+//     header.classList.remove('header-movie')
+//     header.classList.add('header-saved-recipes')
+    
+// }
+
+// function pullSavedRecipe() {
+//         var values = [],
+//             keys = Object.keys(localStorage),
+//             i = keys.length;
+    
+//         while ( i-- ) {
+//             values.push( localStorage.getItem(keys[i]) );
+//         }
+//         return values;
+// }
+
+// // {name: "Smothered Chicken", Recipe: "object"}
+
+// console.log(savedRecipes)
+
+// function displaySavedRecipes(savedRecipes) {
+//     buildModal();
+
+//     for (var i = 0; i < savedRecipes.length; i++) {
+//         var recipeCard = $("<section>").addClass("card");
+        
+//         // Create data attributes
+//         recipeCard.attr("data-title", savedRecipes[i].label);
+//         recipeCard.attr("data-image", savedRecipes[i].images.REGULAR.url);
+//         recipeCard.attr("data-url", savedRecipes[i].url);
+//         recipeCard.attr("data-ingredients", savedRecipes[i].ingredientLines);
+
+//         // CARD TITLE
+//         var recipeName = $("<div>").addClass("card-header");
+        
+//         // Recipe Name
+//         recipeName.append($("<div>").addClass("card-header-title").text(savedRecipes[i].label));
+//         console.log(savedRecipes[i].label);
+
+//         // CARD IMAGE
+//         var recipeImg = $("<figure>").addClass("image is-4by3")
+//         .append($("<img>").attr("src", savedRecipes[i].images.REGULAR.url));
+
+//         // CARD FOOTER
+//         var recipeData = $("<div>").addClass("card-footer");
+
+//         recipeCard.append(recipeName);
+//         recipeCard.append(recipeImg);
+//         recipeCard.append(recipeData);
+
+//         contentContainer.append(recipeCard);
+// }
+// }
 
 function finalPage() {
     // clears out all existing content
