@@ -1,7 +1,7 @@
 // homepage
 var homepageButton = document.getElementById('homepage-button')
 var homepage = document.getElementById('homepage')
-homepageButton.addEventListener('click' , removeHides)
+homepageButton.addEventListener('click', removeHides)
 var header = document.querySelector('.hero')
 var movieSection = document.querySelector('.section');
 var backToHomepage = document.getElementById('back-to-homepage-btn')
@@ -28,8 +28,8 @@ function removeHides() {
 }
 
 // API Credentials
-var appID = "4238a1ff";
-var appKey = "c7d57c2318b4a47dee8151c302c2a3cb";
+var appID = '4238a1ff';
+var appKey = 'c7d57c2318b4a47dee8151c302c2a3cb';
 
 // DOM Variables
 var searchLabel = $("#search-label");
@@ -39,94 +39,118 @@ var contentContainer = $("#content");
 var foodSearch = $(".food-field")
 var savedRecipes = $("#saved-recipes");
 
+
 // Recipe API
 // Captures user input as query term for API call
 function getRecipes(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    var searchTerm = searchInput.val()
-    var baseURL = "https://api.edamam.com/api/recipes/v2?type=public&q=";
-    var call = baseURL + searchTerm + "&app_id=" + appID + "&app_key=" + appKey;
 
-    console.log(call); 
+  var searchTerm = searchInput.val();
 
-    $.ajax({url: call, success: function(response) {
-        console.log(response);
+  var baseURL = 'https://api.edamam.com/api/recipes/v2?type=public&q=';
+  var call = baseURL + searchTerm + '&app_id=' + appID + '&app_key=' + appKey;
 
-        var recipes = response.hits;
-        renderRecipes(recipes);
-    }})
+  console.log(call);
+
+  $.ajax({
+    url: call,
+    success: function (response) {
+      console.log(response);
+
+      var recipes = response.hits;
+      renderRecipes(recipes);
+    },
+  });
 }
 
 function renderRecipes(recipesResponse) {
-    // Clears any existing grid that may already exist
-    contentContainer.text("");
+  // Clears any existing grid that may already exist
+  contentContainer.text('');
 
-    buildModal();
+  buildModal();
 
-    for (var i = 0; i < recipesResponse.length; i++) {
-        var recipeCard = $("<section>").addClass("card");
-        
-        // Create data attributes
-        recipeCard.attr("data-title", recipesResponse[i].recipe.label);
-        recipeCard.attr("data-image", recipesResponse[i].recipe.images.REGULAR.url);
-        recipeCard.attr("data-cuisine", recipesResponse[i].recipe.cuisineType[0]);
-        recipeCard.attr("data-prep", recipesResponse[i].recipe.totalTime);
-        recipeCard.attr("data-url", recipesResponse[i].recipe.url);
-        recipeCard.attr("data-ingredients", recipesResponse[i].recipe.ingredientLines);
+  for (var i = 0; i < recipesResponse.length; i++) {
+    var recipeCard = $('<section>').addClass('card');
 
-        // CARD TITLE
-        var recipeName = $("<div>").addClass("card-header");
-        
-        // Recipe Name
-        recipeName.append($("<div>").addClass("card-header-title").text(recipesResponse[i].recipe.label));
-        console.log(recipesResponse[i].recipe.label);
+    // Create data attributes
+    recipeCard.attr('data-title', recipesResponse[i].recipe.label);
+    recipeCard.attr('data-image', recipesResponse[i].recipe.images.REGULAR.url);
+    recipeCard.attr('data-cuisine', recipesResponse[i].recipe.cuisineType[0]);
+    recipeCard.attr('data-prep', recipesResponse[i].recipe.totalTime);
+    recipeCard.attr('data-url', recipesResponse[i].recipe.url);
+    recipeCard.attr(
+      'data-ingredients',
+      recipesResponse[i].recipe.ingredientLines
+    );
 
-        // CARD IMAGE
-        var recipeImg = $("<figure>").addClass("image is-4by3")
-        .append($("<img>").attr("src", recipesResponse[i].recipe.images.REGULAR.url));
+    // CARD TITLE
+    var recipeName = $('<div>').addClass('card-header');
 
-        // CARD FOOTER
-        var recipeData = $("<div>").addClass("card-footer");
-        
-        // Cuisine Type
-        recipeData.append($("<div>").addClass("card-footer-item").text(recipesResponse[i].recipe.cuisineType[0]));
-        console.log(recipesResponse[i].recipe.cuisineType[0]);
+    // Recipe Name
+    recipeName.append(
+      $('<div>')
+        .addClass('card-header-title')
+        .text(recipesResponse[i].recipe.label)
+    );
+    console.log(recipesResponse[i].recipe.label);
 
-        // Prep Time
-        // recipeData.append($("<div>").addClass("card-footer-item").text(recipesResponse[i].recipe.totalTime));
-        // console.log(recipesResponse[i].recipe.totalTime);
+    // CARD IMAGE
+    var recipeImg = $('<figure>')
+      .addClass('image is-4by3')
+      .append(
+        $('<img>').attr('src', recipesResponse[i].recipe.images.REGULAR.url)
+      );
 
-        recipeCard.append(recipeName);
-        recipeCard.append(recipeImg);
-        recipeCard.append(recipeData);
+    // CARD FOOTER
+    var recipeData = $('<div>').addClass('card-footer');
 
-        contentContainer.append(recipeCard);
+    // Cuisine Type
+    recipeData.append(
+      $('<div>')
+        .addClass('card-footer-item')
+        .text(recipesResponse[i].recipe.cuisineType[0])
+    );
+    console.log(recipesResponse[i].recipe.cuisineType[0]);
 
-        // Link to Recipe (On Modal)
-        
-        var recipeLink = recipesResponse[i].recipe.url;
-        console.log(recipeLink);
+    // Prep Time
+    recipeData.append(
+      $('<div>')
+        .addClass('card-footer-item')
+        .text(recipesResponse[i].recipe.totalTime)
+    );
+    console.log(recipesResponse[i].recipe.totalTime);
 
-        // Meal Type (Maybe used to filter?)
-        var recipeMeal = recipesResponse[i].recipe.mealType[0];
-        console.log(recipeMeal);
+    recipeCard.append(recipeName);
+    recipeCard.append(recipeImg);
+    recipeCard.append(recipeData);
 
-        for (var j = 0; j < recipesResponse[i].recipe.ingredientLines.length; j++) {
-            // Ingredients
-            console.log(recipesResponse[i].recipe.ingredientLines[j]);
-        }
+    contentContainer.append(recipeCard);
 
-        // REMOVE THIS WHEN WE AREN'T LOGGING TO CONSOLE
-        console.log("-----");
+    // Link to Recipe (On Modal)
+
+    var recipeLink = recipesResponse[i].recipe.url;
+    console.log(recipeLink);
+
+    // Meal Type (Maybe used to filter?)
+    var recipeMeal = recipesResponse[i].recipe.mealType[0];
+    console.log(recipeMeal);
+
+    for (var j = 0; j < recipesResponse[i].recipe.ingredientLines.length; j++) {
+      // Ingredients
+      console.log(recipesResponse[i].recipe.ingredientLines[j]);
     }
+
+    // REMOVE THIS WHEN WE AREN'T LOGGING TO CONSOLE
+    console.log('-----');
+  }
 }
 
-// Movie API
+// Movie API===========================================================================================================
 
 // Movie API Variables
 const tmdbKey = 'e86784e99f17cd9b8e35fcc922379812'
-let genreURL =  'https://api.themoviedb.org/3/genre/movie/list?api_key=' + tmdbKey + '&language=en-US'
+let genreURL = 'https://api.themoviedb.org/3/genre/movie/list?api_key=' + tmdbKey + '&language=en-US'
 let discoverURL = 'https://api.themoviedb.org/3/discover/movie?api_key=' + tmdbKey + '&language=en-US' + '&with_genres='
 let imageBaseURL = 'http://image.tmdb.org/t/p/'
 let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdbKey + '&language=en-US&page=1&query='
@@ -134,6 +158,10 @@ let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdb
 
 let filmSearchEl = document.getElementById('film-search')
 let genreQuery;
+
+let filmPageBtn = document.getElementById('film-placeholder')
+filmPageBtn.addEventListener('click', filmSearch)
+filmPageBtn.addEventListener('click', genreButtons)
 
 
 // Creates film search field and button
@@ -151,21 +179,23 @@ function filmSearch() {
     // Clears recipe cards out of content container
     contentContainer.text("");
 
+   //hide cocktail button
+   cocktailBtnEl.classList.add('hide');
 
     let filmSearchForm = document.createElement('form')
-    let description =document.createElement('label')
+    let description = document.createElement('label')
     let filmSearchDiv = document.createElement('div')
     let filmSearchLabel = document.createElement('label')
     let filmSearchInput = document.createElement('input')
     let filmSearchBtn = document.createElement('button')
-    
+
     filmSearchForm.classList.add('field')
     description.classList.add('label')
     filmSearchDiv.classList.add('control')
     filmSearchLabel.classList.add('label')
     filmSearchInput.classList.add('input', 'is-large')
     filmSearchBtn.classList.add('button')
-    
+
     filmSearchInput.setAttribute('type', 'text')
     filmSearchInput.setAttribute('placeholder', 'i.e. Inherent Vice')
     filmSearchInput.setAttribute('id', 'film-search-term')
@@ -187,21 +217,20 @@ function filmSearch() {
 
 //Queries film api for search term, displays films if search term returns results
 function queryFilm(e) {
-    e.preventDefault()
-    let filmSearch = document.getElementById('film-search-term').value
+  e.preventDefault();
+  let filmSearch = document.getElementById('film-search-term').value;
 
-    fetch (filmSearchURL + filmSearch)
-        .then(resp => resp.json())
-
-        .then(data => displayFilms(data, e))
+  fetch(filmSearchURL + filmSearch)
+    .then((resp) => resp.json())
+    .then((data) => displayFilms(data, e));
 }
 
 //Generates genre buttons based on api classifications
 function genreButtons() {
-    fetch (genreURL)
+    fetch(genreURL)
         .then(resp => resp.json())
         .then(data => genFilmBtns(data))
-    
+
     function genFilmBtns(data) {
         // makes food info disappear
         foodSearch.text("")
@@ -224,7 +253,11 @@ function genreButtons() {
 
         genreList.addEventListener('click', getFilms);
     }
-}
+    let genreList = document.querySelector('.genre-buttons');
+
+    genreList.addEventListener('click', getFilms);
+  }
+
 
 //On click of genre button, searches discover API for films of that genre
 function getFilms(e) {
@@ -235,38 +268,39 @@ function getFilms(e) {
     fetch(genreURL)
         .then(resp => resp.json())
         .then(data => codifyGenre(data))
-    
+
     function codifyGenre(data) {
         for (let i = 0; i < data.genres.length; i++) {
             if (genrePick === data.genres[i].name) {
                 genreQuery = data.genres[i].id
-                }
             }
+        }
         //Randomizes page number of genre query return
         let randoNum = Math.floor(Math.random() * 380)
         fetch(discoverURL + genreQuery + '&page=' + randoNum)
             .then(resp => resp.json())
             .then(data => displayFilms(data))
-            
-        }
     }
-    
+}
+
 //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
+
+
 
 function buildModal() {
     var modal = $("<div>").addClass("modal").attr("id", "modal");
-    
+
     var modalBackground = $("<div>").addClass("modal-background");
-    
+
     var modalCard = $("<div>").addClass("modal-card");
-    
+
     // Header and title
     var modalHead = $("<div>").addClass("modal-card-head");
     var modalTitle = $("<div>").addClass("modal-card-title").attr("id", "recipe-title");
 
     // Body with content
     var modalBody = $("<div>").addClass("modal-card-body").attr("id", "recipe-content");
-    
+
     // Footer and buttons
     var modalFooter = $("<footer>").addClass("modal-card-foot");
     var saveBttn = $("<button>").text("Save").addClass("button");
@@ -289,7 +323,7 @@ function buildModal() {
 
     modal.append(modalBackground);
     modal.append(modalCard);
-    
+
     contentContainer.append(modal);
 }
 
@@ -298,124 +332,199 @@ function displayFilms(data) {
         alert('No movie with that name')
         return;
     }
-    console.log(data)
     contentContainer.text("");
     for (let i = 0; i < 16; i++) {
-        let filmDiv = document.createElement('section')
+        let filmDiv = document.createElement('div') //changed from section
         filmDiv.classList.add('card', 'film-section')
         let filmDivFace = document.createElement('div')
         filmDivFace.classList.add('film-face')
         let filmDivBody = document.createElement('div')
         filmDivBody.classList.add('film-body')
-        
+
         let filmTitleEl = document.createElement('h2')
         let filmPicEl = document.createElement('img')
         let filmScoreEl = document.createElement('h2')
         let filmInfoEl = document.createElement('p')
+
+        let filmSelectBtn = document.createElement('button')
         
-        filmTitleEl.innerHTML = '<strong>' + data.results[i].title + '</strong>';
-        filmPicEl.setAttribute('src', imageBaseURL + '/w342/' + data.results[i].poster_path)
-        filmScoreEl.innerHTML = '<strong>' + data.results[i].vote_average + '</strong>'  + '/10'
+        filmTitleEl.textContent = data.results[i].title;
+        filmTitleEl.classList.add('film-title')
+        filmPicEl.setAttribute('src', imageBaseURL + '/w780/' + data.results[i].poster_path)
+        let posterPath = imageBaseURL + '/w780/' + data.results[i].poster_path
+        filmScoreEl.innerHTML = data.results[i].vote_average + '/10'
         filmInfoEl.textContent = data.results[i].overview
-        filmDivFace.appendChild(filmTitleEl)
+
+        filmSelectBtn.setAttribute('class', 'select-film')
+        filmSelectBtn.setAttribute('data-title', data.results[i].title)
+        filmSelectBtn.setAttribute('data-pic', posterPath)
+        filmSelectBtn.setAttribute('data-score', data.results[i].vote_average+ '/10')
+        filmSelectBtn.setAttribute('data-info', data.results[i].overview)
+
+        filmSelectBtn.innerHTML = 'Select'
+        filmSelectBtn.addEventListener('click', selectFilm)
+
+        filmDiv.appendChild(filmTitleEl)
         filmDivFace.appendChild(filmPicEl)
         filmDivBody.appendChild(filmScoreEl)
         filmDivBody.appendChild(filmInfoEl)
+        filmDivBody.appendChild(filmSelectBtn)
         filmDiv.appendChild(filmDivFace)
         filmDiv.appendChild(filmDivBody)
         contentContainer.append(filmDiv)
     }
 }
 
-//poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
+function selectFilm() {
+    let filmObj = {
+        title: this.dataset.title,
+        pic: this.dataset.pic,
+        score: this.dataset.score,
+        info: this.dataset.info
+    }
+    contentContainer.text("")
+    localStorage.setItem('film', JSON.stringify(filmObj))
+}
+
+//poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"==========================================================
+
+function buildModal() {
+  var modal = $('<div>').addClass('modal').attr('id', 'modal');
+
+  var modalBackground = $('<div>').addClass('modal-background');
+
+  var modalCard = $('<div>').addClass('modal-card');
+
+  // Header and title
+  var modalHead = $('<div>').addClass('modal-card-head');
+  var modalTitle = $('<div>')
+    .addClass('modal-card-title')
+    .attr('id', 'recipe-title');
+
+  // Body with content
+  var modalBody = $('<div>')
+    .addClass('modal-card-body')
+    .attr('id', 'recipe-content');
+
+  // Footer and buttons
+  var modalFooter = $('<footer>').addClass('modal-card-foot');
+  var saveBttn = $('<button>').text('Save').addClass('button');
+  var selectBttn = $('<button>').text('Select').addClass('button');
+
+  selectBttn.on('click', getCocktailButton);
+
+  //   selectBttn.on('click', genreButtons);
+  //   selectBttn.on('click', filmSearch);
+
+  // Save recipe data
+  saveBttn.on('click', saveRecipe);
+
+  modalHead.append(modalTitle);
+
+  modalFooter.append(saveBttn);
+  modalFooter.append(selectBttn);
+
+  modalCard.append(modalHead);
+  modalCard.append(modalBody);
+  modalCard.append(modalFooter);
+
+  modal.append(modalBackground);
+  modal.append(modalCard);
+
+  contentContainer.append(modal);
+}
 
 function updateModal(recipeCard) {
-    // Modal elements
-    var modRecipeName = $("#recipe-title");
-    var modRecipeContent = $("#recipe-content");
+  // Modal elements
+  var modRecipeName = $('#recipe-title');
+  var modRecipeContent = $('#recipe-content');
 
-    // Resets any existing data
-    modRecipeName.text("");
-    modRecipeContent.text("");
+  // Resets any existing data
+  modRecipeName.text('');
+  modRecipeContent.text('');
 
-    // Updates modal elements with data from data attributes
-    modRecipeName.text(recipeCard.dataset.title);
+  // Updates modal elements with data from data attributes
+  modRecipeName.text(recipeCard.dataset.title);
 
-    modRecipeContent.append($("<img>")
-    .attr("src", recipeCard.dataset.image)
-    .attr("id", "recipe-card-img"));
+  modRecipeContent.append(
+    $('<img>')
+      .attr('src', recipeCard.dataset.image)
+      .attr('id', 'recipe-card-img')
+  );
 
-    if (recipeCard.dataset.prep != 0) {
-        modRecipeContent.append($("<p>")
-        
-        .attr("id", "recipe-card-preptime"));
-    }
+  if (recipeCard.dataset.prep != 0) {
+    modRecipeContent.append(
+      $('<p>')
+        .text('Prep Time: ' + recipeCard.dataset.prep)
+        .attr('id', 'recipe-card-preptime')
+    );
+  }
 
-    modRecipeContent.append($("<h3>")
-    .text("Ingredients"));
+  modRecipeContent.append($('<h3>').text('Ingredients'));
 
-    var ingredArr = recipeCard.dataset.ingredients.split(",");
-    
-    for (var i = 0; i < ingredArr.length; i++) {
-        modRecipeContent.append($("<p>")
-        .text(ingredArr[i])
-        .addClass("recipe-card-ingredient"));
-    }
+  var ingredArr = recipeCard.dataset.ingredients.split(',');
 
-    // Link to recipe source with instructions
-    modRecipeContent.append($("<a>")
-    .text("Learn More")
-    .attr("href", recipeCard.dataset.url)
-    .attr("target", "_blank")
-    .attr("id", "recipe-card-link"));
+  for (var i = 0; i < ingredArr.length; i++) {
+    modRecipeContent.append(
+      $('<p>').text(ingredArr[i]).addClass('recipe-card-ingredient')
+    );
+  }
+
+  // Link to recipe source with instructions
+  modRecipeContent.append(
+    $('<a>')
+      .text('Learn More')
+      .attr('href', recipeCard.dataset.url)
+      .attr('target', '_blank')
+      .attr('id', 'recipe-card-link')
+  );
 }
 
 function showModal(event) {
-    // Clicking anywhere in the recipe card references the parent container
-    var parentCon = event.target.parentNode.parentNode;
+  // Clicking anywhere in the recipe card references the parent container
+  var parentCon = event.target.parentNode.parentNode;
 
-    // Only triggers modal on recipe card click
-    if (parentCon.tagName != "SECTION") {
-        return
-    }
+  // Only triggers modal on recipe card click
+  if (parentCon.tagName != 'SECTION') {
+    return;
+  }
 
-    // Updates modal with recipe card information
-    updateModal(parentCon);
+  // Updates modal with recipe card information
+  updateModal(parentCon);
 
-    var modal = $("#modal");
+  var modal = $('#modal');
 
     // Display the modal
     modal.css("display", "block");
-  
+
     // Close modal when you click off of it
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target.classList.contains("modal-background")) {
             modal.css("display", "none");
         }
     }
-}
+  };
+
 
 // Saves a recipe to local storage
 function saveRecipe() {
-    
-    var savedIngredients = [];
+  var savedIngredients = [];
 
-    // Stores ingredients in an array
-    for (var i = 0; i < ($(".recipe-card-ingredient")).length; i++) {
-        savedIngredients.push(($(".recipe-card-ingredient"))[i].innerHTML);
-    }
 
-    // Isolated numeric value
-    var savedPrep = ($("#recipe-card-preptime").text()).split(" ");
+  // Stores ingredients in an array
+  for (var i = 0; i < $('.recipe-card-ingredient').length; i++) {
+    savedIngredients.push($('.recipe-card-ingredient')[i].innerHTML);
+  }
 
+  // Isolated numeric value
+  var savedPrep = $('#recipe-card-preptime').text().split(' ');
     // Recipe object to be passed as value in local storage
-    var recipeObj = {
-        // name: 
-        image: $("#recipe-card-img").attr("src"),
-        preptime: savedPrep[2],
-        ingredients: savedIngredients,
-        url: $("#recipe-card-link").attr("href")
-    };
+  var recipeObj = {
+    image: $('#recipe-card-img').attr('src'),
+    preptime: savedPrep[2],
+    ingredients: savedIngredients,
+    url: $('#recipe-card-link').attr('href'),
+  };
 
     localStorage.setItem($("#recipe-title").text(), JSON.stringify(recipeObj));
 }
@@ -460,89 +569,123 @@ function renderSaved() {
 
 searchBttn.on("click", getRecipes);
 
-contentContainer.on("click", showModal);
-
 savedRecipes.on("click", renderSaved)
 
-// //Saved recipe page
-// let savedRecipes = pullSavedRecipe()
-// let savedRecipeBtn = document.getElementById('saved-recipes')
-// savedRecipeBtn.addEventListener('click', savedRecipePage)
-// // savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
+searchBttn.on('click', getRecipes);
 
-// function savedRecipePage() {
-//     // clears existing header styles and content
-//     contentContainer.text('')
-//     filmSearchEl.classList.add('hide')
-//     foodSearch.addClass('hide')
-//     header.classList.remove('header-food')
-//     header.classList.remove('header-movie')
-//     header.classList.add('header-saved-recipes')
-    
-// }
+contentContainer.on('click', showModal);
 
-// function pullSavedRecipe() {
-//         var values = [],
-//             keys = Object.keys(localStorage),
-//             i = keys.length;
-    
-//         while ( i-- ) {
-//             values.push( localStorage.getItem(keys[i]) );
-//         }
-//         return values;
-// }
+//Saved recipe page
+// ------- cocktail API ----------
+//cocktail variables
 
-// // {name: "Smothered Chicken", Recipe: "object"}
+var cocktailBtnEl = document.getElementById('cocktail-btn');
 
-// console.log(savedRecipes)
+// function to show cocktail button
+function getCocktailButton() {
+  contentContainer.text('');
+  foodSearch.text('');
+  cocktailBtnEl.classList.remove('hide');
+}
 
-// function displaySavedRecipes(savedRecipes) {
-//     buildModal();
+//function to generate random cocktail
+function getRandomCocktail() {
+  var requestUrl = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 
-//     for (var i = 0; i < savedRecipes.length; i++) {
-//         var recipeCard = $("<section>").addClass("card");
-        
-//         // Create data attributes
-//         recipeCard.attr("data-title", savedRecipes[i].label);
-//         recipeCard.attr("data-image", savedRecipes[i].images.REGULAR.url);
-//         recipeCard.attr("data-url", savedRecipes[i].url);
-//         recipeCard.attr("data-ingredients", savedRecipes[i].ingredientLines);
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      //   console.log(data);
+      displayRandomCocktail(data);
+    });
+}
 
-//         // CARD TITLE
-//         var recipeName = $("<div>").addClass("card-header");
-        
-//         // Recipe Name
-//         recipeName.append($("<div>").addClass("card-header-title").text(savedRecipes[i].label));
-//         console.log(savedRecipes[i].label);
+//funciton to display random cocktail
+function displayRandomCocktail(cocktail) {
+  let cocktailDiv = document.createElement('section');
+  cocktailDiv.classList.add('card', 'film-section');
+  let cocktailDivFace = document.createElement('div');
+  cocktailDivFace.classList.add('film-face');
+  let cocktailDivBody = document.createElement('div');
+  cocktailDivBody.classList.add('film-body');
+  let cocktailSaveBtn = document.createElement('button');
+  cocktailSaveBtn.classList.add('button');
+  cocktailSaveBtn.innerText = 'Save';
+  let cocktailSelectBtn = document.createElement('button');
+  cocktailSelectBtn.classList.add('button');
+  cocktailSelectBtn.innerText = 'Select';
 
-//         // CARD IMAGE
-//         var recipeImg = $("<figure>").addClass("image is-4by3")
-//         .append($("<img>").attr("src", savedRecipes[i].images.REGULAR.url));
+  // Click select button on cocktail card to open film page
+  cocktailSelectBtn.addEventListener('click', genreButtons);
+  cocktailSelectBtn.addEventListener('click', filmSearch);
 
-//         // CARD FOOTER
-//         var recipeData = $("<div>").addClass("card-footer");
+  //   function to save cocktail to local storage
+  let cocktailString = JSON.stringify(cocktail);
 
-//         recipeCard.append(recipeName);
-//         recipeCard.append(recipeImg);
-//         recipeCard.append(recipeData);
+  function saveCocktail() {
+    localStorage.setItem('cocktail', cocktailString);
+  }
 
-//         contentContainer.append(recipeCard);
-// }
-// }
+  // Click Save button to save cocktail to local storage
+  cocktailSaveBtn.addEventListener('click', saveCocktail);
+
+  let cocktailTitleEl = document.createElement('h2');
+  let cocktailPicEl = document.createElement('img');
+  let cocktailInfoEl = document.createElement('p');
+
+  //   create li elements for each measurement and ingredient
+  for (let i = 1; i < 16; i++) {
+    //   stop loop when it gets to an ingredient that is null
+    if (cocktail.drinks[0][`strIngredient${i}`] == null) {
+      break;
+    }
+
+    let ingredient = document.createElement('li');
+    ingredient.innerHTML =
+      cocktail.drinks[0][`strMeasure${i}`] +
+      ': ' +
+      cocktail.drinks[0][`strIngredient${i}`];
+    cocktailDivBody.appendChild(ingredient);
+  }
+
+  cocktailTitleEl.innerHTML =
+    '<strong>' + cocktail.drinks[0].strDrink + '</strong>';
+  cocktailPicEl.setAttribute('src', cocktail.drinks[0].strDrinkThumb);
+  cocktailPicEl.setAttribute('style', 'width:250px;height:250px;');
+  cocktailInfoEl.textContent = cocktail.drinks[0].strInstructions;
+  cocktailDivFace.appendChild(cocktailTitleEl);
+  cocktailDivFace.appendChild(cocktailPicEl);
+  cocktailDivBody.appendChild(cocktailInfoEl);
+  cocktailDivBody.appendChild(cocktailSaveBtn);
+  cocktailDivBody.appendChild(cocktailSelectBtn);
+  cocktailDiv.appendChild(cocktailDivFace);
+  cocktailDiv.appendChild(cocktailDivBody);
+  contentContainer.append(cocktailDiv);
+}
+
+//click button to run function to get random cocktail
+cocktailBtnEl.addEventListener('click', getFourRandomCocktails);
+
+function getFourRandomCocktails() {
+  contentContainer.text('');
+  for (var i = 0; i < 4; i++) {
+    getRandomCocktail();
+  }
+}
 
 function finalPage() {
     // clears out all existing content
     let contentCont = document.getElementById('content')
-   header.classList.add('hide')
-   let main = document.querySelector('#content')
-   main.classList.add('hide')
-   let filmSearch = document.querySelector('#film-search')
-   filmSearch.classList.add('hide')
-   let finalPageContent = document.getElementById('final-page')
-   finalPageContent.classList.remove('hide')
-   finalPageContent.classList.add('final-page')
-   backToHomepage.classList.remove('hide')
-
-    // unhides that page
-
+    contentCont.classList.add('hide', 'add-to-content')
+    header.classList.add('hide')
+    let filmSearch = document.querySelector('#film-search')
+    filmSearch.classList.add('hide')
+    let finalPageContent = document.getElementById('final-page')
+    finalPageContent.classList.remove('hide')
+    finalPageContent.classList.add('final-page')
+    
+    let savedRecipesbuttonFinal = document.getElementById('saved-final')
+    let homepageButtonFinal = document.getElementById('homepage-final')
 }

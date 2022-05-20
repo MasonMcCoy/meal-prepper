@@ -11,15 +11,17 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 
-<body id="document">
+<body>
     <header class="hero is-small is-info hide">
         <div class="hero-body">
             <h1 class="title">Homebuddy</h1>
             <p class="subtitle">Sometimes it's better to stay home.</p>
+
             <ul class="links" id="links"> 
                 <li class="saved-recipes" id="saved-recipes">Saved Recipes</li>
                 <li class="back-to-homepage-btn" id="back-to-homepage-btn">Back to Homepage</li>
             </ul>
+
         </div>
     </header>
     <!-- div of entire landing page -->
@@ -42,16 +44,23 @@
     </form>
 
 
+    <!-- cocktail button -->
+    <div class="has-text-centered"><button class="button hide" id="cocktail-btn">cocktail btn placeholder</button></div>
 
     <!-- Area film search bar and genre buttons populate -->
-
+    <button id="film-placeholder">Film-Page</button>
     <div id="film-search"></div>
 
     <main id="content"></main>
 
     <!-- final page -->
     <div class="final-page hide" id="final-page">
-        <h1 class="final-page-title title">You have a delicious and fun evening ahead!</h1>
+        <div class="final-page-header">
+            <li class="saved-recipes links" id="saved-recipes saved-final">Saved Recipes</li>
+            <li class="back-to-homepage-btn links" id="back-to-homepage-btn homepage-final">Back to Homepage</li>
+        </div>
+   
+        <h1 class="final-page-title title">You have a memorable evening ahead!</h1>
         <h2 class="final-page-subheader">These are your selections:</h2>
     </div>
 
