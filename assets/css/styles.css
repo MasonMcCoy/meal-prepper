@@ -176,9 +176,93 @@ text-align: center;
 
 
 /* film section */
-.film-section {
+
+.film-title {
+    font-size: larger;
+    font-weight: bolder;
+    padding: .5rem;
+    text-align: center;
+}
+
+.film-face {
+    width: 100%;
+    background: radial-gradient(#111 50%, #000 100%);
+    overflow: hidden;
+    position: relative;
+}
+
+.film-face img {
+    max-width: 100%;
+    display: block;
+    transform: scale(1.3);
+    transition: all 0.3s ease-out;
+}
+
+.film-section:hover img {
+    transform: scale(1.1) translateY(-20px);
+    opacity: 0.3;
+}
+
+.film-body {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     padding: 1rem;
-    transition: 0.4s;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+}
+
+.film-body h2 {
+    font-weight: 700;
+    font-size: 32px;
+    margin: 0 0 20px;
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.3s ease-out;
+    font-weight: bolder;
+    font-size: larger;
+    color: rgb(173, 33, 14);
+}
+
+.film-body p {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.3s ease-out 0.2s;
+}
+
+.film-body button {
+    color: white;
+    background-color: rgb(173, 33, 14);
+    border-color: rgb(126, 23, 10);
+    display: inline-block;
+    padding: 10px 25px;
+    margin: 1rem 0rem .6rem 0rem;
+    text-decoration: none;
+    border-radius: 10px;
+    opacity: 0;
+    transition: all 0.3s ease-out 0.4s;
+}
+
+.film-body button:hover {
+    background: rgb(126, 23, 10);
+}
+
+.film-section:hover .film-body h2 {
+    opacity: 1;
+    transform: translateY(0);
+
+}
+
+.film-section:hover .film-body p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.film-section:hover .film-body button {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .genre-buttons {
@@ -268,4 +352,22 @@ justify-content: space-between;
 /* class to add to elements to hide them  */
 .hide {
     display: none;
+}
+
+@media (max-width: 480px) {
+    .film-body p {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .film-body p {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .film-body p {
+        display: none;
+    }
 }
