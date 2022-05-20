@@ -599,6 +599,8 @@ function getCocktailButton() {
   contentContainer.text('');
   foodSearch.text('');
   cocktailBtnEl.classList.remove('hide');
+  header.classList.remove('header-food')
+  header.classList.add('header-cocktails')
 }
 
 //function to generate random cocktail
@@ -693,9 +695,6 @@ function finalPage() {
     let filmSearch = document.querySelector('#film-search')
     filmSearch.classList.add('hide')
 }
-
-let savedRecipesbuttonFinal = document.getElementById('saved-final')
-let homepageButtonFinal = document.getElementById('homepage-final')
 
 savedRecipes.on('click', savedRecipePage)
 // savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
