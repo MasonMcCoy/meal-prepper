@@ -113,12 +113,19 @@ function renderRecipes(recipesResponse) {
     console.log(recipesResponse[i].recipe.cuisineType[0]);
 
     // Prep Time
-    recipeData.append(
-      $('<div>')
-        .addClass('card-footer-item')
-        .text(recipesResponse[i].recipe.totalTime)
-    );
-    console.log(recipesResponse[i].recipe.totalTime);
+    if (recipesResponse[i].recipe.totalTime === 0 ) {
+        recipeData.append(
+            $('<div>')
+            .addClass('card-footer-item')
+            .text("Quick prep!")
+        )
+    } else {
+        recipeData.append(
+            $('<div>')
+            .addClass('card-footer-item')
+            .text("Ready in " + recipesResponse[i].recipe.totalTime + " minutes")
+        )
+    }
 
     recipeCard.append(recipeName);
     recipeCard.append(recipeImg);
@@ -448,7 +455,7 @@ function updateModal(recipeCard) {
   if (recipeCard.dataset.prep != 0) {
     modRecipeContent.append(
       $('<p>')
-        .text('Prep Time: ' + recipeCard.dataset.prep)
+        .text('Prep Time: ' + recipeCard.dataset.prep + ' minutes')
         .attr('id', 'recipe-card-preptime')
     );
   }
@@ -466,7 +473,7 @@ function updateModal(recipeCard) {
   // Link to recipe source with instructions
   modRecipeContent.append(
     $('<a>')
-      .text('Learn More')
+      .text('View Recipe')
       .attr('href', recipeCard.dataset.url)
       .attr('target', '_blank')
       .attr('id', 'recipe-card-link')
@@ -546,15 +553,16 @@ function saveRecipeSession() {
 
 function renderSaved() {
     contentContainer.text("");
+    cocktailBtnEl.style.display = "none";
     filmSearchEl.style.display = "none";
 
     for (var i = 0; i < localStorage.length; i++) {
         
         var savedObj = localStorage.getItem(localStorage.key(i));
-        
         var parsedObj = JSON.parse(savedObj);
 
-        var savedCard = $("<section>").addClass("card");
+        var savedCard = $("<section>").addClass("card")
+        .css("text-align", "center");
 
         // CARD TITLE
         var recipeName = $("<div>").addClass("card-header");
@@ -566,19 +574,22 @@ function renderSaved() {
         var recipeImg = $("<figure>").addClass("image is-4by3")
         .append($("<img>").attr("src", parsedObj.image));
 
-        // CARD FOOTER
-        var recipeData = $("<div>").addClass("card-footer");
+        // CARD BUTTON
+        var urlLink = $("<a>").text("View Site")
+        .attr("href", parsedObj.url)
+        .attr("target", "_blank")
+        .css("color", "white")
+        .css("background-color", "rgb(173, 33, 14)")
+        .css("padding", "5px")
+        .css("border-radius", "5px")
+        .css("position", "relative")
+        .css("top", "-30px");
 
         savedCard.append(recipeName);
         savedCard.append(recipeImg);
-        savedCard.append(recipeData);
+        savedCard.append(urlLink);
 
         contentContainer.append(savedCard);
-
-        console.log(parsedObj.image);
-        console.log(parsedObj.preptime);
-        console.log(parsedObj.ingredients);
-        console.log(parsedObj.url);
     }
 }
 

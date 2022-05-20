@@ -354,10 +354,40 @@ justify-content: space-between;
     display: none;
 }
 
+.modal-card-body {
+    text-align: center;
+    font-size: 20px;
+}
+
+.modal-card-body img {
+    display: block;
+    width: 75%;
+    margin: auto;
+}
+
+.modal-card-body h3 {
+    display: inline-flex;
+    border-bottom: 2px solid black;
+    margin-top: 10px;
+}
+
+.modal-card-body a {
+    margin-top: 20px;
+}
+
+.modal-card-foot {
+    justify-content: flex-end;
+}
+
 @media (max-width: 480px) {
     .film-body p {
         display: none;
     }
+
+    #content {
+        display: flex !important;
+        flex-direction: column;
+    }    
 }
 
 @media (max-width: 768px) {
