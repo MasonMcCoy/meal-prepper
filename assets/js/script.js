@@ -552,7 +552,4 @@ function finalPage() {
     // linksAtTop.appendChild(homepageBtn)
     // linksAtTop.appendChild(savedRecipeBtn)
     // finalPageContent.appendChild(linksAtTop)
-
-
-
 }
