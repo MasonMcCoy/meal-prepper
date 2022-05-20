@@ -564,72 +564,54 @@ function saveRecipeSession() {
 
 function renderSaved() {
 
-  contentContainer.text('');
-  filmSearchEl.style.display = 'none';
+contentContainer.text('');
+filmSearchEl.style.display = 'none';
+cocktailLabelEl.style.display = 'none';
+cocktailBtnEl.style.display = "none";
+  
+for (var i = 0; i < localStorage.length; i++) {
+  var savedObj = localStorage.getItem(localStorage.key(i));
+  var parsedObj = JSON.parse(savedObj);
 
-  for (var i = 0; i < localStorage.length; i++) {
-    var savedObj = localStorage.getItem(localStorage.key(i));
+  var savedCard = $("<section>").addClass("card")
+  .css("text-align", "center");
 
-    var parsedObj = JSON.parse(savedObj);
-    contentContainer.text("");
-    cocktailBtnEl.style.display = "none";
-    filmSearchEl.style.display = "none";
+  var savedCard = $('<section>').addClass('card');
 
-    for (var i = 0; i < localStorage.length; i++) {
-        
-        var savedObj = localStorage.getItem(localStorage.key(i));
-        var parsedObj = JSON.parse(savedObj);
-
-        var savedCard = $("<section>").addClass("card")
-        .css("text-align", "center");
-
-    var savedCard = $('<section>').addClass('card');
-
-    // CARD TITLE
-    var recipeName = $('<div>').addClass('card-header');
+  // CARD TITLE
+  var recipeName = $('<div>').addClass('card-header');
 
 
-    // Recipe Name
-    recipeName.append(
-      $('<div>').addClass('card-header-title').text(localStorage.key(i))
-    );
+  // Recipe Name
+  recipeName.append(
+    $('<div>').addClass('card-header-title').text(localStorage.key(i))
+  );
 
-    // CARD IMAGE
-    var recipeImg = $('<figure>')
-      .addClass('image is-4by3')
-      .append($('<img>').attr('src', parsedObj.image));
+  // CARD IMAGE
+  var recipeImg = $('<figure>')
+  .addClass('image is-4by3')
+  .append($('<img>').attr('src', parsedObj.image));
 
-    // CARD FOOTER
-    var recipeData = $('<div>').addClass('card-footer');
+  // CARD FOOTER
+  var recipeData = $('<div>').addClass('card-footer');
 
-    savedCard.append(recipeName);
-    savedCard.append(recipeImg);
-    savedCard.append(recipeData);
-
-    contentContainer.append(savedCard);
-
-    console.log(parsedObj.image);
-    console.log(parsedObj.preptime);
-    console.log(parsedObj.ingredients);
-    console.log(parsedObj.url);
-  }
-        // CARD BUTTON
-        var urlLink = $("<a>").text("View Site")
-        .attr("href", parsedObj.url)
-        .attr("target", "_blank")
-        .css("color", "white")
-        .css("background-color", "rgb(173, 33, 14)")
-        .css("padding", "5px")
-        .css("border-radius", "5px")
-        .css("position", "relative")
-        .css("top", "-30px");
-
-        savedCard.append(recipeName);
-        savedCard.append(recipeImg);
-        savedCard.append(urlLink);
-
-        contentContainer.append(savedCard);
-    }
+  // CARD BUTTON
+  var urlLink = $("<a>").text("View Site")
+  .attr("href", parsedObj.url)
+  .attr("target", "_blank")
+  .css("color", "white")
+  .css("background-color", "rgb(173, 33, 14)")
+  .css("padding", "5px")
+  .css("border-radius", "5px")
+  .css("position", "relative")
+  .css("top", "-30px");
+  
+  savedCard.append(recipeName);
+  savedCard.append(recipeImg);
+  savedCard.append(urlLink);
+  
+  contentContainer.append(savedCard);
+}       
 }
 
 searchBttn.on('click', getRecipes);
