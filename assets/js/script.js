@@ -687,13 +687,11 @@ function getFourRandomCocktails() {
 function finalPage() {
     // clears out all existing content
     let contentCont = document.getElementById('content')
-    contentCont.classList.add('hide', 'add-to-content')
-    header.classList.add('hide')
+    contentCont.classList.add('hide')
+    header.classList.remove('header-movie')
+    header.classList.add('header-final')
     let filmSearch = document.querySelector('#film-search')
     filmSearch.classList.add('hide')
-    let finalPageContent = document.getElementById('final-page')
-    finalPageContent.classList.remove('hide')
-    finalPageContent.classList.add('final-page')
 }
 
 let savedRecipesbuttonFinal = document.getElementById('saved-final')
