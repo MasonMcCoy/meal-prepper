@@ -255,7 +255,7 @@ function genreButtons() {
 
     genreList.addEventListener('click', getFilms);
   }
-}
+
 
 //On click of genre button, searches discover API for films of that genre
 function getFilms(e) {
@@ -278,9 +278,7 @@ function getFilms(e) {
         fetch(discoverURL + genreQuery + '&page=' + randoNum)
             .then(resp => resp.json())
             .then(data => displayFilms(data))
-
     }
-
 }
 
 //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"
@@ -332,7 +330,6 @@ function displayFilms(data) {
         alert('No movie with that name')
         return;
     }
-    console.log(data)
     contentContainer.text("");
     for (let i = 0; i < 16; i++) {
         let filmDiv = document.createElement('div') //changed from section
@@ -374,12 +371,6 @@ function displayFilms(data) {
         filmDiv.appendChild(filmDivBody)
         contentContainer.append(filmDiv)
     }
-    //Randomizes page number of genre query return
-    let randoNum = Math.floor(Math.random() * 380);
-    fetch(discoverURL + genreQuery + '&page=' + randoNum)
-      .then((resp) => resp.json())
-      .then((data) => displayFilms(data));
-  }
 }
 
 function selectFilm() {
@@ -389,6 +380,7 @@ function selectFilm() {
         score: this.dataset.score,
         info: this.dataset.info
     }
+    contentContainer.text("")
     localStorage.setItem('film', JSON.stringify(filmObj))
 }
 
@@ -510,7 +502,7 @@ function showModal(event) {
         }
     }
   };
-}
+
 
 // Saves a recipe to local storage
 function saveRecipe() {
