@@ -8,7 +8,6 @@ var backToHomepage = document.getElementById('back-to-homepage-btn')
 var placeholderButton = document.getElementById('placeholder')
 
 // clears movie info to make room for final page
-placeholderButton.addEventListener('click', finalPage)
 backToHomepage.addEventListener('click', refreshPage)
 
 // goes back to homepage and clears cache
@@ -158,11 +157,6 @@ let filmSearchURL = ' https://api.themoviedb.org/3/search/movie?api_key=' + tmdb
 
 let filmSearchEl = document.getElementById('film-search')
 let genreQuery;
-
-let filmPageBtn = document.getElementById('film-placeholder')
-filmPageBtn.addEventListener('click', filmSearch)
-filmPageBtn.addEventListener('click', genreButtons)
-
 
 // Creates film search field and button
 
@@ -383,7 +377,8 @@ function selectFilm() {
         info: this.dataset.info
     }
     contentContainer.text("")
-    localStorage.setItem('film', JSON.stringify(filmObj))
+    sessionStorage.setItem('film', JSON.stringify(filmObj))
+    finalPage();
 }
 
 //poster sizes 0: "w92" 1: "w154" 2: "w185" 3: "w342" 4: "w500" 5: "w780" 6: "original"==========================================================
@@ -411,10 +406,8 @@ function buildModal() {
   var saveBttn = $('<button>').text('Save').addClass('button');
   var selectBttn = $('<button>').text('Select').addClass('button');
 
+  selectBttn.on('click', saveRecipeSession);
   selectBttn.on('click', getCocktailButton);
-
-  //   selectBttn.on('click', genreButtons);
-  //   selectBttn.on('click', filmSearch);
 
   // Save recipe data
   saveBttn.on('click', saveRecipe);
@@ -529,6 +522,28 @@ function saveRecipe() {
     localStorage.setItem($("#recipe-title").text(), JSON.stringify(recipeObj));
 }
 
+function saveRecipeSession() {
+    var savedIngredients = [];
+  
+  
+    // Stores ingredients in an array
+    for (var i = 0; i < $('.recipe-card-ingredient').length; i++) {
+      savedIngredients.push($('.recipe-card-ingredient')[i].innerHTML);
+    }
+  
+    // Isolated numeric value
+    var savedPrep = $('#recipe-card-preptime').text().split(' ');
+      // Recipe object to be passed as value in local storage
+    var recipeObj = {
+      image: $('#recipe-card-img').attr('src'),
+      preptime: savedPrep[2],
+      ingredients: savedIngredients,
+      url: $('#recipe-card-link').attr('href'),
+    };
+    sessionStorage.clear();
+      sessionStorage.setItem($("#recipe-title").text(), JSON.stringify(recipeObj));
+  }
+
 function renderSaved() {
     contentContainer.text("");
     filmSearchEl.style.display = "none";
@@ -569,9 +584,7 @@ function renderSaved() {
 
 searchBttn.on("click", getRecipes);
 
-savedRecipes.on("click", renderSaved)
-
-searchBttn.on('click', getRecipes);
+savedRecipes.on("click", renderSaved);
 
 contentContainer.on('click', showModal);
 
@@ -610,9 +623,6 @@ function displayRandomCocktail(cocktail) {
   cocktailDivFace.classList.add('film-face');
   let cocktailDivBody = document.createElement('div');
   cocktailDivBody.classList.add('film-body');
-  let cocktailSaveBtn = document.createElement('button');
-  cocktailSaveBtn.classList.add('button');
-  cocktailSaveBtn.innerText = 'Save';
   let cocktailSelectBtn = document.createElement('button');
   cocktailSelectBtn.classList.add('button');
   cocktailSelectBtn.innerText = 'Select';
@@ -625,11 +635,11 @@ function displayRandomCocktail(cocktail) {
   let cocktailString = JSON.stringify(cocktail);
 
   function saveCocktail() {
-    localStorage.setItem('cocktail', cocktailString);
+    sessionStorage.setItem('cocktail', cocktailString);
   }
 
-  // Click Save button to save cocktail to local storage
-  cocktailSaveBtn.addEventListener('click', saveCocktail);
+  // Click select button to save cocktail to local storage
+  cocktailSelectBtn.addEventListener('click', saveCocktail);
 
   let cocktailTitleEl = document.createElement('h2');
   let cocktailPicEl = document.createElement('img');
@@ -658,7 +668,6 @@ function displayRandomCocktail(cocktail) {
   cocktailDivFace.appendChild(cocktailTitleEl);
   cocktailDivFace.appendChild(cocktailPicEl);
   cocktailDivBody.appendChild(cocktailInfoEl);
-  cocktailDivBody.appendChild(cocktailSaveBtn);
   cocktailDivBody.appendChild(cocktailSelectBtn);
   cocktailDiv.appendChild(cocktailDivFace);
   cocktailDiv.appendChild(cocktailDivBody);
@@ -685,7 +694,18 @@ function finalPage() {
     let finalPageContent = document.getElementById('final-page')
     finalPageContent.classList.remove('hide')
     finalPageContent.classList.add('final-page')
-    
-    let savedRecipesbuttonFinal = document.getElementById('saved-final')
-    let homepageButtonFinal = document.getElementById('homepage-final')
+}
+
+let savedRecipesbuttonFinal = document.getElementById('saved-final')
+let homepageButtonFinal = document.getElementById('homepage-final')
+
+savedRecipes.on('click', savedRecipePage)
+// savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
+function savedRecipePage() {
+    // clears existing header styles and content
+    filmSearchEl.classList.add('hide')
+    foodSearch.addClass('hide')
+    header.classList.remove('header-food')
+    header.classList.remove('header-movie')
+    header.classList.add('header-saved-recipes')
 }
