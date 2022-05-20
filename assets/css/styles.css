@@ -394,7 +394,10 @@ justify-content: space-between;
 }
 
 @media (max-width: 480px) {
-    
+    .links {
+        font-size: 60%;
+        margin-top: 40px;
+    }
 }
 
 /* media queries for film section */
