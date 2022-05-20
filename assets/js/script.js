@@ -612,4 +612,11 @@ function displayRandomCocktail(cocktail) {
 }
 
 //click button to run function to get random cocktail
-cocktailBtnEl.addEventListener('click', getRandomCocktail);
+cocktailBtnEl.addEventListener('click', getFourRandomCocktails);
+
+function getFourRandomCocktails() {
+  contentContainer.text('');
+  for (var i = 0; i < 4; i++) {
+    getRandomCocktail();
+  }
+}
