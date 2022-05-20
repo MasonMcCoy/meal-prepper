@@ -1,373 +1,458 @@
 /* http://meyerweb.com/eric/tools/css/reset/     
    v2.0 | 20110126    
-   License: none (public domain) */  
-   html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup,  menu, nav, output, ruby, section, summary, time, mark, audio, video {  
-    margin: 0;  
-    padding: 0;  
-    border: 0;  
-    font-size: 100%;  
-    vertical-align: baseline; 
+   License: none (public domain) */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
 }
 
-body, html {
-    height: 100%;
-    list-style: none;
-    text-decoration: none;
-  }
+body,
+html {
+  height: 100%;
+  list-style: none;
+  text-decoration: none;
+}
 /* homepage styles */
 .homepage {
-    display: flex;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    height: 100%;
-    background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/Stocksy_txpcd1dc0eemKP100_Medium_1292869_jxi1ai.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+  background-image: url('https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/Stocksy_txpcd1dc0eemKP100_Medium_1292869_jxi1ai.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
 }
 
 .homepage-content {
-    display: inline-block;
-    text-align: center;
-    flex-direction: column;
+  display: inline-block;
+  text-align: center;
+  flex-direction: column;
 }
 
 .homepage-header {
-    display: flex;
-    justify-content: center;
-    font-size: 4em;
-    color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 4em;
+  color: white;
 }
 
 /* style for header on movie page */
 .header-movie {
-    display: flex;
-    justify-content: center;
-     height: 300px;
-     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652912387/Project1-Images/Movie_Night_asdkk5_wl7tsf.png");
-     background-position: center;
-     background-repeat: no-repeat;
-     background-size: cover;
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  background-image: url('https://res.cloudinary.com/dcm18vy74/image/upload/v1652912387/Project1-Images/Movie_Night_asdkk5_wl7tsf.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .header-food {
-    display: flex;
-   justify-content: center;
-    height: 300px;
-    background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559609/Project1-Images/GettyImages_1032865588_c3pry7.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  background-image: url('https://res.cloudinary.com/dcm18vy74/image/upload/v1652559609/Project1-Images/GettyImages_1032865588_c3pry7.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .header-saved-recipes {
-    display: flex;
-   justify-content: center;
-    height: 300px;
-    background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652563929/Project1-Images/1539273371768-w2880-ab_iahilf.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  background-image: url('https://res.cloudinary.com/dcm18vy74/image/upload/v1652563929/Project1-Images/1539273371768-w2880-ab_iahilf.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-
-
 .homepage-button {
-    margin-top: 10px;
-    display: inline-block;
-    background-color: rgb(173, 33, 14);
-    color: white;
-    border-color: rgb(126, 23, 10);
+  margin-top: 10px;
+  display: inline-block;
+  background-color: rgb(173, 33, 14);
+  color: white;
+  border-color: rgb(126, 23, 10);
   padding: 10px;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
   border-radius: 9px;
   width: fit-content;
-  
 }
 
 /* styles for recipes page */
 .links {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 li {
-    display: inline-block;
-    margin-top: 80px;
+  display: inline-block;
+  margin-top: 80px;
 }
 
 li:hover {
-   color: rgb(173, 33, 14);
-   cursor: pointer;
+  color: rgb(173, 33, 14);
+  cursor: pointer;
 }
 
 button:hover {
-   background-color: rgb(126, 23, 10);
-   cursor: pointer;
-   color: white;
+  background-color: rgb(126, 23, 10);
+  cursor: pointer;
+  color: white;
 }
-.title  {
-    font-size: 5em;
+.title {
+  font-size: 5em;
 }
 /* body of page */
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
 }
 /* button styles */
 .button {
-    margin-top: 10px;
-    color: white;
-    background-color: rgb(173, 33, 14);
-    border-color: rgb(126, 23, 10);
+  margin-top: 10px;
+  color: white;
+  background-color: rgb(173, 33, 14);
+  border-color: rgb(126, 23, 10);
 }
 
 /* section displaying rendered cards */
 
 section {
-    margin: 10px;
+  margin: 10px;
 }
 
 #content {
-    display: none;
-    grid-template-columns: repeat(4, 1fr);
-    margin: 40px 40px;
-    padding: 10px 10px;
-
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 40px 40px;
+  padding: 10px 10px;
 }
 
 /* recipe card styles */
 .card {
-    margin: 10px 10px;
-    background-color: rgb(245, 243, 239);
-    color: black;  
-    transition: box-shadow .3s;
+  margin: 10px 10px;
+  background-color: rgb(245, 243, 239);
+  color: black;
+  transition: box-shadow 0.3s;
 }
 
 .card:hover {
-    box-shadow: 0 0 20px rgba(2, 2, 2, 0.2); 
-    cursor: pointer;
-    position: relative;
-    top:-5px;
-    left:-5px;
-    display:block;
+  box-shadow: 0 0 20px rgba(2, 2, 2, 0.2);
+  cursor: pointer;
+  position: relative;
+  top: -5px;
+  left: -5px;
+  display: block;
 }
 
 .card-hearder-title {
-    padding-left: 5px;
+  padding-left: 5px;
 }
 
 /* search bar on recipes page */
 .control {
-display: inline-block;
-
+  display: inline-block;
 }
 
 .label {
-text-align: center;
+  text-align: center;
 }
 
+/* cocktail styles */
+.cocktail-section {
+  padding: 1rem;
+  transition: all 0.4s ease 0s;
+}
+
+.cocktail-card {
+  margin: 10px 10px;
+  background-color: rgb(245, 243, 239);
+  color: black;
+}
 
 /* film section */
 
 .film-title {
-    font-size: larger;
-    font-weight: bolder;
-    padding: .5rem;
-    text-align: center;
+  font-size: larger;
+  font-weight: bolder;
+  padding: 0.5rem;
+  text-align: center;
 }
 
 .film-face {
-    width: 100%;
-    background: radial-gradient(#111 50%, #000 100%);
-    overflow: hidden;
-    position: relative;
+  width: 100%;
+  background: radial-gradient(#111 50%, #000 100%);
+  overflow: hidden;
+  position: relative;
 }
 
 .film-face img {
-    max-width: 100%;
-    display: block;
-    transform: scale(1.3);
-    transition: all 0.3s ease-out;
+  max-width: 100%;
+  display: block;
+  transform: scale(1.3);
+  transition: all 0.3s ease-out;
 }
 
 .film-section:hover img {
-    transform: scale(1.1) translateY(-20px);
-    opacity: 0.3;
+  transform: scale(1.1) translateY(-20px);
+  opacity: 0.3;
 }
 
 .film-body {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    color: #fff;
-    font-size: 18px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
 }
 
 .film-body h2 {
-    font-weight: 700;
-    font-size: 32px;
-    margin: 0 0 20px;
-    transform: translateY(30px);
-    opacity: 0;
-    transition: all 0.3s ease-out;
-    font-weight: bolder;
-    font-size: larger;
-    color: rgb(173, 33, 14);
+  font-weight: 700;
+  font-size: 32px;
+  margin: 0 0 20px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.3s ease-out;
+  font-weight: bolder;
+  font-size: larger;
+  color: rgb(173, 33, 14);
 }
 
 .film-body p {
-    transform: translateY(30px);
-    opacity: 0;
-    transition: all 0.3s ease-out 0.2s;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.3s ease-out 0.2s;
 }
 
 .film-body button {
-    color: white;
-    background-color: rgb(173, 33, 14);
-    border-color: rgb(126, 23, 10);
-    display: inline-block;
-    padding: 10px 25px;
-    margin: 1rem 0rem .6rem 0rem;
-    text-decoration: none;
-    border-radius: 10px;
-    opacity: 0;
-    transition: all 0.3s ease-out 0.4s;
+  color: white;
+  background-color: rgb(173, 33, 14);
+  border-color: rgb(126, 23, 10);
+  display: inline-block;
+  padding: 10px 25px;
+  margin: 1rem 0rem 0.6rem 0rem;
+  text-decoration: none;
+  border-radius: 10px;
+  opacity: 0;
+  transition: all 0.3s ease-out 0.4s;
 }
 
 .film-body button:hover {
-    background: rgb(126, 23, 10);
+  background: rgb(126, 23, 10);
 }
 
 .film-section:hover .film-body h2 {
-    opacity: 1;
-    transform: translateY(0);
-
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .film-section:hover .film-body p {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .film-section:hover .film-body button {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .genre-buttons {
-    display: flex;
-    justify-content: center;
-    width: auto;
-    margin: .5rem 15rem;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  width: auto;
+  margin: 0.5rem 15rem;
+  flex-wrap: wrap;
 }
 
 .genre-buttons button {
-    margin-top: 10px;
-    color: white;
-    background-color: rgb(173, 33, 14);
-    border-color: rgb(126, 23, 10);
+  margin-top: 10px;
+  color: white;
+  background-color: rgb(173, 33, 14);
+  border-color: rgb(126, 23, 10);
 }
 
 .title-2 {
-    font-size: 5em;
-    color: rgb(173, 33, 14);
+  font-size: 5em;
+  color: rgb(173, 33, 14);
 }
 
 .homepage-hide {
-    display: none;
-    padding: 0;
-    margin: 0;
+  display: none;
+  padding: 0;
+  margin: 0;
 }
 /* final page styles */
 .final-page {
-    display: flex;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-direction: column;
-    height: 100%;
-    width: auto;
-    background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/IMG_4417_o0znjm.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: auto;
+  background-image: url('https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/IMG_4417_o0znjm.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
 }
 /* final page header */
 .final-page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 95%;
-    height: auto;
-    
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 95%;
+  height: auto;
 }
 /* button styles */
 .saved-recipes {
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* button styles */
 .back-to-homepage-btn {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .final-page-title {
-    display: inline-block;
-    align-items: center;
-    color: white;
-    font-size: 3em;
-    width: auto;
-    background-color: rgba(0,0,0,.5);
-    padding: 5px;
-    border-radius: 5px;
+  display: inline-block;
+  align-items: center;
+  color: white;
+  font-size: 3em;
+  width: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .final-page-subheader {
-    display: flex;
-    height: 20%;
-    width: auto;
-    justify-content: center;
+  display: flex;
+  height: 20%;
+  width: auto;
+  justify-content: center;
 }
 
 .add-to-content {
-    margin:0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 /* class to add to elements to hide them  */
 .hide {
-    display: none;
+  display: none;
 }
 
 @media (max-width: 480px) {
-    .film-body p {
-        display: none;
-    }
+  .film-body p {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-    .film-body p {
-        display: none;
-    }
+  .film-body p {
+    display: none;
+  }
 }
 
 @media (max-width: 1024px) {
-    .film-body p {
-        display: none;
-    }
+  .film-body p {
+    display: none;
+  }
 }
