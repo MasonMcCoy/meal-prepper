@@ -610,6 +610,8 @@ function getCocktailButton() {
   contentContainer.text('');
   foodSearch.text('');
   cocktailBtnEl.classList.remove('hide');
+  header.classList.remove('header-food')
+  header.classList.add('header-cocktails')
 }
 
 //function to generate random cocktail
@@ -698,17 +700,12 @@ function getFourRandomCocktails() {
 function finalPage() {
     // clears out all existing content
     let contentCont = document.getElementById('content')
-    contentCont.classList.add('hide', 'add-to-content')
-    header.classList.add('hide')
+    contentCont.classList.add('hide')
+    header.classList.remove('header-movie')
+    header.classList.add('header-final')
     let filmSearch = document.querySelector('#film-search')
     filmSearch.classList.add('hide')
-    let finalPageContent = document.getElementById('final-page')
-    finalPageContent.classList.remove('hide')
-    finalPageContent.classList.add('final-page')
 }
-
-let savedRecipesbuttonFinal = document.getElementById('saved-final')
-let homepageButtonFinal = document.getElementById('homepage-final')
 
 savedRecipes.on('click', savedRecipePage)
 // savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
@@ -718,5 +715,7 @@ function savedRecipePage() {
     foodSearch.addClass('hide')
     header.classList.remove('header-food')
     header.classList.remove('header-movie')
+    header.classList.remove('header-cocktails')
+    header.classList.remove('header-final')
     header.classList.add('header-saved-recipes')
 }

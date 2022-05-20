@@ -73,6 +73,15 @@ body, html {
     background-size: cover;
 }
 
+.header-cocktails {
+    display: flex;
+   justify-content: center;
+    height: 300px;
+    background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1653015179/Project1-Images/Header15_unndgb.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 
 
 .homepage-button {
@@ -290,31 +299,7 @@ text-align: center;
     padding: 0;
     margin: 0;
 }
-/* final page styles */
-.final-page {
-    display: flex;
-    margin: 0;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-direction: column;
-    height: 100%;
-    width: auto;
-    background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/IMG_4417_o0znjm.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: white;
-}
-/* final page header */
-.final-page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 95%;
-    height: auto;
-    
-}
+
 /* button styles */
 .saved-recipes {
 display: flex;
@@ -327,6 +312,17 @@ justify-content: space-between;
     justify-content: space-between;
 }
 
+/* final page */
+
+.header-final {
+    display: flex;
+    justify-content: center;
+     height: 300px;
+     background-image: url("https://res.cloudinary.com/dcm18vy74/image/upload/v1652559610/Project1-Images/photo-1519756719377-e084f8333a83_dck21u.jpg");
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
+}
 .final-page-title {
     display: inline-block;
     align-items: center;
