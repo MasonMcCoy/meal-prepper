@@ -73,8 +73,6 @@ body, html {
     background-size: cover;
 }
 
-
-
 .homepage-button {
     margin-top: 10px;
     display: inline-block;
@@ -354,6 +352,52 @@ justify-content: space-between;
     display: none;
 }
 
+/* media queries for headers */
+
+/* homepage */
+@media (max-width: 480px) {
+    .homepage-content {
+        font-size: 60%;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+    height: 150px;
+    }
+}
+/* headers */
+@media (max-width: 480px) {
+    .hero {
+        height: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero .title {
+        font-size: 2.2em;
+        width: fit-content;
+        background-color: rgba(0,0,0,.5);
+        padding: 5px;
+    border-radius: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero p {
+        font-size: 75%;
+        width: fit-content;
+        background-color: rgba(0,0,0,.5);
+        padding: 2px;
+    border-radius: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    
+}
+
+/* media queries for film section */
 @media (max-width: 480px) {
     .film-body p {
         display: none;
