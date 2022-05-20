@@ -704,5 +704,7 @@ function savedRecipePage() {
     foodSearch.addClass('hide')
     header.classList.remove('header-food')
     header.classList.remove('header-movie')
+    header.classList.remove('header-cocktails')
+    header.classList.remove('header-final')
     header.classList.add('header-saved-recipes')
 }
