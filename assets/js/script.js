@@ -32,11 +32,13 @@ var appID = '4238a1ff';
 var appKey = 'c7d57c2318b4a47dee8151c302c2a3cb';
 
 // DOM Variables
-var searchLabel = $('#search-label');
-var searchInput = $('#search-term');
-var searchBttn = $('#search-button');
-var contentContainer = $('#content');
-var foodSearch = $('.food-field');
+var searchLabel = $("#search-label");
+var searchInput = $("#search-term");
+var searchBttn = $("#search-button");
+var contentContainer = $("#content");
+var foodSearch = $(".food-field")
+var savedRecipes = $("#saved-recipes");
+
 
 // Recipe API
 // Captures user input as query term for API call
@@ -516,8 +518,7 @@ function saveRecipe() {
 
   // Isolated numeric value
   var savedPrep = $('#recipe-card-preptime').text().split(' ');
-
-  // Recipe object to be passed as value in local storage
+    // Recipe object to be passed as value in local storage
   var recipeObj = {
     image: $('#recipe-card-img').attr('src'),
     preptime: savedPrep[2],
@@ -525,9 +526,50 @@ function saveRecipe() {
     url: $('#recipe-card-link').attr('href'),
   };
 
-
-  localStorage.setItem($('#recipe-title').text(), JSON.stringify(recipeObj));
+    localStorage.setItem($("#recipe-title").text(), JSON.stringify(recipeObj));
 }
+
+function renderSaved() {
+    contentContainer.text("");
+    filmSearchEl.style.display = "none";
+
+    for (var i = 0; i < localStorage.length; i++) {
+        
+        var savedObj = localStorage.getItem(localStorage.key(i));
+        
+        var parsedObj = JSON.parse(savedObj);
+
+        var savedCard = $("<section>").addClass("card");
+
+        // CARD TITLE
+        var recipeName = $("<div>").addClass("card-header");
+        
+        // Recipe Name
+        recipeName.append($("<div>").addClass("card-header-title").text(localStorage.key(i)));
+
+        // CARD IMAGE
+        var recipeImg = $("<figure>").addClass("image is-4by3")
+        .append($("<img>").attr("src", parsedObj.image));
+
+        // CARD FOOTER
+        var recipeData = $("<div>").addClass("card-footer");
+
+        savedCard.append(recipeName);
+        savedCard.append(recipeImg);
+        savedCard.append(recipeData);
+
+        contentContainer.append(savedCard);
+
+        console.log(parsedObj.image);
+        console.log(parsedObj.preptime);
+        console.log(parsedObj.ingredients);
+        console.log(parsedObj.url);
+    }
+}
+
+searchBttn.on("click", getRecipes);
+
+savedRecipes.on("click", renderSaved)
 
 searchBttn.on('click', getRecipes);
 
