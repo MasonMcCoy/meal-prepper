@@ -519,11 +519,6 @@ section {
   }
   
   .film-body p {
-<<<<<<< HEAD
-    display: none;
-  }
-  
-=======
         display: none;
     }
     .card.film-section {
@@ -564,7 +559,6 @@ section {
     display: none;
   }
 
->>>>>>> 157636f024fc2f26f935d9f07171f0c9d423044c
   #content {
     display: flex !important;
     flex-direction: column;
