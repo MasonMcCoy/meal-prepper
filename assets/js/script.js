@@ -780,7 +780,8 @@ function finalPage() {
       var finalCard = $("<div>").addClass("card")
       .css("text-align", "center")
       .css("flex", "1")
-      .css("flex-basis", "1");
+      .css("flex-basis", "100%")
+      .css("align-self", "stretch");
 
       // CARD TITLE
       var recipeName = $('<div>').addClass('card-header');
