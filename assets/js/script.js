@@ -764,6 +764,7 @@ function finalPage() {
 
   
     contentContainer.append($("<h3>")
+    .attr('id', 'final-page-header')
     .text("You'll be enjoying the following this evening!")
     .css("margin-bottom", "10px"));
 
