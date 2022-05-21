@@ -805,7 +805,7 @@ function finalPage() {
       contentContainer.append(finalCard);
     }
 
-    contentContainer.append($("<h2>")
+    contentContainer.append($("<h3>")
     .text("You'll be enjoying the following this evening!")
     .css("margin-bottom", "10px"));
 }
