@@ -48,12 +48,9 @@ function getRecipes(event) {
   var baseURL = 'https://api.edamam.com/api/recipes/v2?type=public&q=';
   var call = baseURL + searchTerm + '&app_id=' + appID + '&app_key=' + appKey;
 
-  console.log(call);
-
   $.ajax({
     url: call,
     success: function (response) {
-      console.log(response);
 
       var recipes = response.hits;
       renderRecipes(recipes);
@@ -90,7 +87,6 @@ function renderRecipes(recipesResponse) {
         .addClass('card-header-title')
         .text(recipesResponse[i].recipe.label)
     );
-    console.log(recipesResponse[i].recipe.label);
 
     // CARD IMAGE
     var recipeImg = $('<figure>')
@@ -108,8 +104,7 @@ function renderRecipes(recipesResponse) {
         .addClass('card-footer-item')
         .text(recipesResponse[i].recipe.cuisineType[0])
     );
-    console.log(recipesResponse[i].recipe.cuisineType[0]);
-
+    
     // Prep Time
     if (recipesResponse[i].recipe.totalTime === 0 ) {
         recipeData.append(
@@ -130,27 +125,10 @@ function renderRecipes(recipesResponse) {
     recipeCard.append(recipeData);
 
     contentContainer.append(recipeCard);
-
-    // Link to Recipe (On Modal)
-
-    var recipeLink = recipesResponse[i].recipe.url;
-    console.log(recipeLink);
-
-    // Meal Type (Maybe used to filter?)
-    var recipeMeal = recipesResponse[i].recipe.mealType[0];
-    console.log(recipeMeal);
-
-    for (var j = 0; j < recipesResponse[i].recipe.ingredientLines.length; j++) {
-      // Ingredients
-      console.log(recipesResponse[i].recipe.ingredientLines[j]);
-    }
-
-    // REMOVE THIS WHEN WE AREN'T LOGGING TO CONSOLE
-    console.log('-----');
   }
 }
 
-// Movie API===========================================================================================================
+// Movie API
 
 // Movie API Variables
 const tmdbKey = 'e86784e99f17cd9b8e35fcc922379812';
@@ -669,7 +647,6 @@ function getRandomCocktail() {
       return response.json();
     })
     .then(function (data) {
-      //   console.log(data);
       displayRandomCocktail(data);
     });
 }
