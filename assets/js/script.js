@@ -261,9 +261,6 @@ function genreButtons() {
 
     genreList.addEventListener('click', getFilms);
   }
-  let genreList = document.querySelector('.genre-buttons');
-
-  genreList.addEventListener('click', getFilms);
 }
 
 //On click of genre button, searches discover API for films of that genre
@@ -654,7 +651,7 @@ function getRandomCocktail() {
 
 //funciton to display random cocktail
 function displayRandomCocktail(cocktail) {
-  let cocktailDiv = document.createElement('section');
+  let cocktailDiv = document.createElement('div');
   cocktailDiv.classList.add('card', 'cocktail-card', 'cocktail-section');
 
   let cocktailDivFace = document.createElement('div');
@@ -785,7 +782,7 @@ function finalPage() {
 
     contentContainer.append($("<h2>")
     .text("You'll be enjoying the following this evening!")
-    .css("font-size", "50px"));
+    .css("margin-bottom", "10px"));
 }
 
 savedRecipes.on('click', savedRecipePage)

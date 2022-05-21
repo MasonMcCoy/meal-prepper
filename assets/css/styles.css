@@ -230,6 +230,10 @@ section {
   padding: 10px 10px;
 }
 
+#content h2 {
+  font-size: 50px;
+}
+
 /* recipe card styles */
 .card {
   margin: 10px 10px;
@@ -432,6 +436,7 @@ section {
   margin: 0;
   padding: 0;
 }
+
 /* class to add to elements to hide them  */
 .hide {
   display: none;
@@ -464,45 +469,56 @@ section {
 
 
 /* media queries */
-
 @media (max-width: 480px) {
-    .links {
-        font-size: 60%;
-        margin-top: 40px;
-    }
-   header {
+  .links {
+    font-size: 60%;
+    margin-top: 40px;
+  }
+  
+  header {
     height: 150px;
-    }
-   .homepage-content {
-        font-size: 60%;
-    }
+  }
+  
+  .homepage-content {
+    font-size: 60%;
+  }
+  
   .hero {
-        height: 50%;
-    }
-   .hero .title {
-        font-size: 2.2em;
-        width: fit-content;
-        background-color: rgba(0,0,0,.5);
-        padding: 5px;
+    height: 50%;
+  }
+  
+  .hero .title {
+    font-size: 2.2em;
+    width: fit-content;
+    background-color: rgba(0,0,0,.5);
+    padding: 5px;
     border-radius: 5px;
-    }
-.hero p {
-        font-size: 75%;
-        width: fit-content;
-        background-color: rgba(0,0,0,.5);
-        padding: 2px;
+  }
+  
+  .hero p {
+    font-size: 75%;
+    width: fit-content;
+    background-color: rgba(0,0,0,.5);
+    padding: 2px;
     border-radius: 5px;
-    }
-   .homepage-content {
-        font-size: 60%;
-    }
+  }
+  
+  .homepage-content {
+    font-size: 60%;
+  }
+  
   .film-body p {
-        display: none;
-    }
+    display: none;
+  }
+  
   #content {
-        display: flex !important;
-        flex-direction: column;
-    }  
+    display: flex !important;
+    flex-direction: column;
+  }
+
+  #content h2 {
+    font-size: 20px;
+  }
 }
 
 @media (max-width: 768px) {
