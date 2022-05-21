@@ -278,6 +278,14 @@ section {
 
 /* film section */
 
+.card.film-section {
+    margin-bottom: 3rem;
+}
+
+.film-section {
+    max-height: 100%;
+}
+
 .film-title {
   font-size: larger;
   font-weight: bolder;
@@ -287,6 +295,7 @@ section {
 
 .film-face {
   width: 100%;
+  height: 100%;
   background: radial-gradient(#111 50%, #000 100%);
   overflow: hidden;
   position: relative;
@@ -294,6 +303,7 @@ section {
 
 .film-face img {
   max-width: 100%;
+  height: 100%;
   display: block;
   transform: scale(1.3);
   transition: all 0.3s ease-out;
@@ -313,6 +323,8 @@ section {
   text-align: center;
   color: #fff;
   font-size: 18px;
+  max-height: 90%;
+  overflow: scroll;
 }
 
 .film-body h2 {
@@ -369,7 +381,6 @@ section {
   display: flex;
   justify-content: center;
   width: auto;
-  margin: 0.5rem 15rem;
   flex-wrap: wrap;
 }
 
@@ -508,9 +519,52 @@ section {
   }
   
   .film-body p {
+<<<<<<< HEAD
     display: none;
   }
   
+=======
+        display: none;
+    }
+    .card.film-section {
+        margin-bottom: 1rem;
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+    }
+    #film-phone-btn {
+        display: initial;
+        color: white;
+        background-color: rgb(173, 33, 14);
+        border-color: rgb(126, 23, 10);
+        display: inline-block;
+        text-decoration: none;
+        border-radius: 10px;
+        position: relative;
+        align-self: center;
+        z-index: 1;
+        width: fit-content;
+        padding: .5rem 1rem;
+        margin: 0.6rem 0rem;
+    }
+
+    #film-phone-info {
+        display: initial;
+    }
+
+    #film-phone-score {
+        display: initial;
+        margin: .5rem 0rem;
+        font-weight: bolder;
+        font-size: larger;
+        color: rgb(173, 33, 14);
+    }
+
+  .select-film {
+    display: none;
+  }
+
+>>>>>>> 157636f024fc2f26f935d9f07171f0c9d423044c
   #content {
     display: flex !important;
     flex-direction: column;
@@ -522,12 +576,6 @@ section {
 }
 
 @media (max-width: 768px) {
-  .film-body p {
-    display: none;
-  }
-}
-
-@media (max-width: 1024px) {
   .film-body p {
     display: none;
   }
