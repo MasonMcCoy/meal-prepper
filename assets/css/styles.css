@@ -187,6 +187,9 @@ html {
 li {
   display: inline-block;
   margin-top: 80px;
+  background-color: rgba(0,0,0,.5);
+  padding: 5px;
+  border-radius: 5px;
 }
 
 li:hover {
