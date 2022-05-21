@@ -392,8 +392,8 @@ function displayFilms(data) {
 
 function selectFilm() {
   let filmObj = {
-    title: this.dataset.title,
-    pic: this.dataset.pic,
+    name: this.dataset.title,
+    image: this.dataset.pic,
     score: this.dataset.score,
     info: this.dataset.info,
   };
@@ -553,18 +553,20 @@ function saveRecipeSession() {
   var savedPrep = $('#recipe-card-preptime').text().split(' ');
   // Recipe object to be passed as value in local storage
   var recipeObj = {
+    name: $('#recipe-title').text(),
     image: $('#recipe-card-img').attr('src'),
     preptime: savedPrep[2],
     ingredients: savedIngredients,
     url: $('#recipe-card-link').attr('href'),
   };
   sessionStorage.clear();
-  sessionStorage.setItem($('#recipe-title').text(), JSON.stringify(recipeObj));
+  sessionStorage.setItem("recipe", JSON.stringify(recipeObj));
 }
 
 function renderSaved() {
 
 contentContainer.text('');
+contentContainer.css("display", "grid");
 filmSearchEl.style.display = 'none';
 cocktailLabelEl.style.display = 'none';
 cocktailBtnEl.style.display = "none";
@@ -575,8 +577,6 @@ for (var i = 0; i < localStorage.length; i++) {
 
   var savedCard = $("<section>").addClass("card")
   .css("text-align", "center");
-
-  var savedCard = $('<section>').addClass('card');
 
   // CARD TITLE
   var recipeName = $('<div>').addClass('card-header');
@@ -669,8 +669,14 @@ function displayRandomCocktail(cocktail) {
   cocktailSelectBtn.addEventListener('click', genreButtons);
   cocktailSelectBtn.addEventListener('click', filmSearch);
 
+  var cocktailObj = {
+    name: cocktail.drinks[0].strDrink,
+    image: cocktail.drinks[0].strDrinkThumb,
+    instructions: cocktail.drinks[0].strInstructions
+}
+
   //   function to save cocktail to local storage
-  let cocktailString = JSON.stringify(cocktail);
+  let cocktailString = JSON.stringify(cocktailObj);
 
   function saveCocktail() {
     sessionStorage.setItem('cocktail', cocktailString);
@@ -723,18 +729,66 @@ function getFourRandomCocktails() {
 }
 
 function finalPage() {
-
     // clears out all existing content
-    let contentCont = document.getElementById('content')
-    contentCont.classList.add('hide')
     header.classList.remove('header-movie')
     header.classList.add('header-final')
     let filmSearch = document.querySelector('#film-search')
     filmSearch.classList.add('hide')
+
+    contentContainer.css("display", "flex")
+    .css("flex-direction", "column-reverse")
+    .css("align-items", "center");
+
+    // Adds chosen recipe, drink, and movie from session storage
+    for (var i = 0; i < sessionStorage.length; i++) {
+      var item = sessionStorage.getItem(sessionStorage.key(i));
+      var parsedItem = JSON.parse(item);
+
+      var finalCard = $("<div>").addClass("card")
+      .css("text-align", "center")
+      .css("width", "50%");
+
+      // CARD TITLE
+      var recipeName = $('<div>').addClass('card-header');
+
+      // Recipe Name
+      recipeName.append(
+      $('<div>').addClass('card-header-title')
+      .text(parsedItem.name)
+      );
+
+      // CARD IMAGE
+      var recipeFig = $('<figure>')
+      .addClass('image is-4by3')
+      
+      var recipeImg = $('<img>').attr('src', parsedItem.image);
+
+      if (parsedItem.url) {
+        var recipeA = $('<a>');
+
+        recipeA.attr("href", parsedItem.url)
+        .attr("target", "_blank");
+
+        recipeA.append(recipeImg);
+        recipeFig.append(recipeA);
+      } else {
+        recipeFig.append(recipeImg);
+      }
+      
+
+      finalCard.append(recipeName);
+      finalCard.append(recipeFig);
+
+      contentContainer.append(finalCard);
+    }
+
+    contentContainer.append($("<h2>")
+    .text("You'll be enjoying the following this evening!")
+    .css("font-size", "50px"));
 }
 
 savedRecipes.on('click', savedRecipePage)
-// savedRecipeBtn.addEventListener('click', renderRecipes(savedRecipes))
+
 function savedRecipePage() {
     // clears existing header styles and content
     filmSearchEl.classList.add('hide')
