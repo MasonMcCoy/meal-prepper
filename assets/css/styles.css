@@ -328,6 +328,7 @@ section {
   font-size: 18px;
   max-height: 90%;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 .film-body h2 {
