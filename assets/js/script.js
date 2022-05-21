@@ -244,7 +244,7 @@ function genreButtons() {
     foodSearch.text('');
     contentContainer.text('');
     // changes header image
-    header.classList.remove('header-food');
+    header.classList.remove('header-cocktails')
     header.classList.add('header-movie');
 
     let genreDiv = document.createElement('div');
@@ -730,6 +730,7 @@ function getFourRandomCocktails() {
 
 function finalPage() {
     // clears out all existing content
+    header.classList.remove('header-cocktails')
     header.classList.remove('header-movie')
     header.classList.add('header-final')
     let filmSearch = document.querySelector('#film-search')
