@@ -759,17 +759,27 @@ function finalPage() {
     filmSearch.classList.add('hide')
 
     contentContainer.css("display", "flex")
-    .css("flex-direction", "column-reverse")
+    .css("flex-direction", "column")
     .css("align-items", "center");
 
+  
+    contentContainer.append($("<h3>")
+    .text("You'll be enjoying the following this evening!")
+    .css("margin-bottom", "10px"));
+
     // Adds chosen recipe, drink, and movie from session storage
+    var finalWrap = $("<div>").attr("id", "final-wrap")
+    .css("display", "flex")
+    .css("align-items", "center");
+
     for (var i = 0; i < sessionStorage.length; i++) {
       var item = sessionStorage.getItem(sessionStorage.key(i));
       var parsedItem = JSON.parse(item);
 
       var finalCard = $("<div>").addClass("card")
       .css("text-align", "center")
-      .css("width", "50%");
+      .css("flex", "1")
+      .css("flex-basis", "1");
 
       // CARD TITLE
       var recipeName = $('<div>').addClass('card-header');
@@ -802,12 +812,10 @@ function finalPage() {
       finalCard.append(recipeName);
       finalCard.append(recipeFig);
 
-      contentContainer.append(finalCard);
+      finalWrap.append(finalCard);
     }
 
-    contentContainer.append($("<h3>")
-    .text("You'll be enjoying the following this evening!")
-    .css("margin-bottom", "10px"));
+    contentContainer.append(finalWrap);
 }
 
 savedRecipes.on('click', savedRecipePage)

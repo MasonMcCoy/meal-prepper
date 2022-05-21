@@ -481,6 +481,10 @@ section {
     justify-content: flex-end;
 }
 
+#final-wrap {
+  flex-direction: row-reverse;
+}
+
 
 /* media queries */
 @media (max-width: 480px) {
@@ -522,41 +526,43 @@ section {
   }
   
   .film-body p {
-        display: none;
-    }
-    .card.film-section {
-        margin-bottom: 1rem;
-        display: flex;
-        align-content: center;
-        flex-direction: column;
-    }
-    #film-phone-btn {
-        display: initial;
-        color: white;
-        background-color: rgb(173, 33, 14);
-        border-color: rgb(126, 23, 10);
-        display: inline-block;
-        text-decoration: none;
-        border-radius: 10px;
-        position: relative;
-        align-self: center;
-        z-index: 1;
-        width: fit-content;
-        padding: .5rem 1rem;
-        margin: 0.6rem 0rem;
-    }
+    display: none;
+  }
+  
+  .card.film-section {
+    margin-bottom: 1rem;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+  }
+  
+  #film-phone-btn {
+    display: initial;
+    color: white;
+    background-color: rgb(173, 33, 14);
+    border-color: rgb(126, 23, 10);
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 10px;
+    position: relative;
+    align-self: center;
+    z-index: 1;
+    width: fit-content;
+    padding: .5rem 1rem;
+    margin: 0.6rem 0rem;
+  }
 
-    #film-phone-info {
-        display: initial;
-    }
+  #film-phone-info {
+    display: initial;
+  }
 
-    #film-phone-score {
-        display: initial;
-        margin: .5rem 0rem;
-        font-weight: bolder;
-        font-size: larger;
-        color: rgb(173, 33, 14);
-    }
+  #film-phone-score {
+    display: initial;
+    margin: .5rem 0rem;
+    font-weight: bolder;
+    font-size: larger;
+    color: rgb(173, 33, 14);
+  }
 
   .select-film {
     display: none;
@@ -569,6 +575,10 @@ section {
 
   #content h3 {
     font-size: 20px;
+  }
+
+  #final-wrap {
+    flex-direction: column-reverse;
   }
 }
 
