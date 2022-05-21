@@ -220,7 +220,7 @@ function filmSearch() {
 
   description.innerHTML = 'Search for a specific movie or by genre';
 
-  filmSearchForm.addEventListener('click', queryFilm);
+  filmSearchBtn.addEventListener('click', queryFilm);
 }
 
 //Queries film api for search term, displays films if search term returns results
@@ -355,29 +355,51 @@ function displayFilms(data) {
     let filmScoreEl = document.createElement('h2');
     let filmInfoEl = document.createElement('p');
 
+    let filmPhoneScore = document.createElement('h2');
+    filmPhoneScore.setAttribute('id', 'film-phone-score')
+    filmPhoneScore.classList.add('hide')
+    let filmPhoneInfo = document.createElement('p');
+    filmPhoneInfo.setAttribute('id', 'film-phone-info')
+    filmPhoneInfo.classList.add('hide')
+
     let filmSelectBtn = document.createElement('button');
+    let filmPhoneBtn = document.createElement('button')
 
     filmTitleEl.textContent = data.results[i].title;
     filmTitleEl.classList.add('film-title');
-    filmPicEl.setAttribute(
-      'src',
-      imageBaseURL + '/w780/' + data.results[i].poster_path
-    );
+
     let posterPath = imageBaseURL + '/w780/' + data.results[i].poster_path;
     filmScoreEl.innerHTML = data.results[i].vote_average + '/10';
     filmInfoEl.textContent = data.results[i].overview;
 
+    filmPhoneScore.innerHTML = data.results[i].vote_average + '/10'
+    filmPhoneInfo.textContent = data.results[i].overview;
+
+    if (posterPath != 'http://image.tmdb.org/t/p//w780/null'){
+      filmPicEl.setAttribute('src', posterPath);
+      filmSelectBtn.setAttribute('data-pic', posterPath);
+      filmPhoneBtn.setAttribute('data-pic', posterPath)
+    } else {
+      filmPicEl.setAttribute('src', './assets/images/default-placeholder.png')
+      filmSelectBtn.setAttribute('data-pic', './assets/images/default-placeholder.png');
+      filmPhoneBtn.setAttribute('data-pic', './assets/images/default-placeholder.png');
+    };
+
     filmSelectBtn.setAttribute('class', 'select-film');
     filmSelectBtn.setAttribute('data-title', data.results[i].title);
-    filmSelectBtn.setAttribute('data-pic', posterPath);
-    filmSelectBtn.setAttribute(
-      'data-score',
-      data.results[i].vote_average + '/10'
-    );
+    filmSelectBtn.setAttribute('data-score', data.results[i].vote_average + '/10');
     filmSelectBtn.setAttribute('data-info', data.results[i].overview);
+
+    filmPhoneBtn.setAttribute('id', 'film-phone-btn')
+    filmPhoneBtn.classList.add('select-film', 'hide');
+    filmPhoneBtn.setAttribute('data-title', data.results[i].title);
+    filmPhoneBtn.setAttribute('data-score', data.results[i].vote_average + '/10');
+    filmPhoneBtn.setAttribute('data-info', data.results[i].overview);
 
     filmSelectBtn.innerHTML = 'Select';
     filmSelectBtn.addEventListener('click', selectFilm);
+    filmPhoneBtn.innerHTML = 'Select';
+    filmPhoneBtn.addEventListener('click', selectFilm);
 
     filmDiv.appendChild(filmTitleEl);
     filmDivFace.appendChild(filmPicEl);
@@ -386,6 +408,9 @@ function displayFilms(data) {
     filmDivBody.appendChild(filmSelectBtn);
     filmDiv.appendChild(filmDivFace);
     filmDiv.appendChild(filmDivBody);
+    filmDiv.appendChild(filmPhoneScore)
+    filmDiv.appendChild(filmPhoneInfo)
+    filmDiv.appendChild(filmPhoneBtn)
     contentContainer.append(filmDiv);
   }
 }
